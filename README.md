@@ -3,8 +3,7 @@
 
 # LimeCrypter
 
-An obfuscation tool for .Net files. Applying some evasion techniques to bypass anti-virus softwares and install a persistence in the machine.
-
+An obfuscation tool for .Net + Native files. Applying some evasion techniques to bypass anti-virus software and install a persistence in the machine. Also, the output payload can be binded with a legit application while it bytes are being injected to legit process as well.
 
 ## Main Features
 
