@@ -56,7 +56,7 @@
 
 #Region "S e t t i n g s"
 
-    Private Sub chkDrop_Click(sender As Object, e As EventArgs)
+    Private Sub chkDrop_Click(sender As Object, e As EventArgs) Handles chkDrop.Click
         If chkDrop.Checked = True Then
             txtDropName.Enabled = True
             txtDropPath.Enabled = True
@@ -391,7 +391,6 @@
         Catch ex As Exception
         End Try
     End Sub
-
 
 
 
