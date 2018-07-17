@@ -69,7 +69,7 @@ Public Class Codedom
 
         Try
             IO.File.Delete(IO.Path.GetTempPath + "\" + Main.ResName + ".Resources")
-            IO.File.Delete(Application.StartupPath + "\" + IO.Path.GetFileName(Main.OutputPayload) + ".hash")
+            IO.File.Delete(Main.OutputPayload + ".hash")
         Catch ex As Exception
         End Try
 
