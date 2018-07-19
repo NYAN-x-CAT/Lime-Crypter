@@ -14,7 +14,7 @@ Public Class Codedom
         With Parameters
             .GenerateExecutable = True
             .OutputAssembly = Path
-            .CompilerOptions += "/platform:X86 /target:winexe"
+            .CompilerOptions += "/platform:anycpu /target:winexe"
             .IncludeDebugInformation = False
             .ReferencedAssemblies.Add("system.data.dll")
             .ReferencedAssemblies.Add("System.Windows.Forms.dll")

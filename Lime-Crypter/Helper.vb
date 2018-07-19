@@ -86,6 +86,38 @@ Public Class Helper
         End Try
     End Sub
 
+
+
+    Public Shared Function ZIP(ByVal B() As Byte, ByRef CM As Boolean) As Byte()
+
+        If CM = True Then
+            Dim M As Object = New IO.MemoryStream()
+            Dim gZip As Object = New IO.Compression.GZipStream(M, IO.Compression.CompressionMode.Compress, True)
+            gZip.Write(B, 0, B.Length)
+            gZip.Dispose()
+            M.Position = 0
+            Dim BF(M.Length) As Byte
+            M.Read(BF, 0, BF.Length)
+            M.Dispose()
+            Return BF
+        Else
+            Dim M As Object = New IO.MemoryStream(B)
+            Dim gZip As Object = New IO.Compression.GZipStream(M, IO.Compression.CompressionMode.Decompress)
+            Dim buffer(3) As Byte
+            M.Position = M.Length - 5
+            M.Read(buffer, 0, 4)
+            Dim size As Integer = BitConverter.ToInt32(buffer, 0)
+            M.Position = 0
+            Dim BF(size - 1) As Byte
+            gZip.Read(BF, 0, size)
+            gZip.Dispose()
+            M.Dispose()
+            Return BF
+        End If
+    End Function
+
+
+
 End Class
 
 

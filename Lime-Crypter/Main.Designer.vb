@@ -42,11 +42,9 @@ Partial Class Main
         Me.PvGroupbox2 = New Lime_Crypter.PVGroupbox()
         Me.chkDelay = New Lime_Crypter.PVCheckbox()
         Me.chkPump = New Lime_Crypter.PVCheckbox()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.numPump = New Lime_Crypter.PVNumericUD()
         Me.chkZoneIden = New Lime_Crypter.PVCheckbox()
-        Me.numDelay = New Lime_Crypter.PVNumericUD()
         Me.chkAntiVM = New Lime_Crypter.PVCheckbox()
         Me.chkAntiTask = New Lime_Crypter.PVCheckbox()
         Me.chkAntiWireshark = New Lime_Crypter.PVCheckbox()
@@ -105,7 +103,7 @@ Partial Class Main
         Me.PvForm1.Name = "PvForm1"
         Me.PvForm1.Size = New System.Drawing.Size(911, 517)
         Me.PvForm1.TabIndex = 0
-        Me.PvForm1.Text = "Lime Crypter"
+        Me.PvForm1.Text = "Lime Crypter v0.3"
         '
         'PvButton1
         '
@@ -161,7 +159,7 @@ Partial Class Main
         Me.PvEmbeddedButton1.Name = "PvEmbeddedButton1"
         Me.PvEmbeddedButton1.Size = New System.Drawing.Size(565, 61)
         Me.PvEmbeddedButton1.TabIndex = 4
-        Me.PvEmbeddedButton1.Text = "Recommended Settings"
+        Me.PvEmbeddedButton1.Text = "- AUTO MODE -"
         '
         'PvGroupbox4
         '
@@ -322,11 +320,9 @@ Partial Class Main
         Me.PvGroupbox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(18, Byte), Integer), CType(CType(20, Byte), Integer), CType(CType(22, Byte), Integer))
         Me.PvGroupbox2.Controls.Add(Me.chkDelay)
         Me.PvGroupbox2.Controls.Add(Me.chkPump)
-        Me.PvGroupbox2.Controls.Add(Me.Label4)
         Me.PvGroupbox2.Controls.Add(Me.Label3)
         Me.PvGroupbox2.Controls.Add(Me.numPump)
         Me.PvGroupbox2.Controls.Add(Me.chkZoneIden)
-        Me.PvGroupbox2.Controls.Add(Me.numDelay)
         Me.PvGroupbox2.Controls.Add(Me.chkAntiVM)
         Me.PvGroupbox2.Controls.Add(Me.chkAntiTask)
         Me.PvGroupbox2.Controls.Add(Me.chkAntiWireshark)
@@ -348,9 +344,9 @@ Partial Class Main
         Me.chkDelay.Location = New System.Drawing.Point(304, 166)
         Me.chkDelay.MinimumSize = New System.Drawing.Size(20, 20)
         Me.chkDelay.Name = "chkDelay"
-        Me.chkDelay.Size = New System.Drawing.Size(109, 30)
+        Me.chkDelay.Size = New System.Drawing.Size(249, 30)
         Me.chkDelay.TabIndex = 11
-        Me.chkDelay.Text = " Delay"
+        Me.chkDelay.Text = " Delay For 60 Seconds"
         '
         'chkPump
         '
@@ -364,15 +360,6 @@ Partial Class Main
         Me.chkPump.Size = New System.Drawing.Size(109, 30)
         Me.chkPump.TabIndex = 10
         Me.chkPump.Text = " Pump"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(518, 166)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(45, 26)
-        Me.Label4.TabIndex = 9
-        Me.Label4.Text = "SEC"
         '
         'Label3
         '
@@ -412,23 +399,6 @@ Partial Class Main
         Me.chkZoneIden.Size = New System.Drawing.Size(259, 30)
         Me.chkZoneIden.TabIndex = 5
         Me.chkZoneIden.Text = "Delete Zone-Identifier"
-        '
-        'numDelay
-        '
-        Me.numDelay.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(32, Byte), Integer), CType(CType(35, Byte), Integer))
-        Me.numDelay.ButtonChange = 1
-        Me.numDelay.Enabled = False
-        Me.numDelay.Font = New System.Drawing.Font("Trebuchet MS", 10.0!)
-        Me.numDelay.ForeColor = System.Drawing.Color.FromArgb(CType(CType(146, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        Me.numDelay.Location = New System.Drawing.Point(419, 166)
-        Me.numDelay.Maximum = 1000
-        Me.numDelay.Minimum = 5
-        Me.numDelay.MinimumSize = New System.Drawing.Size(20, 20)
-        Me.numDelay.Name = "numDelay"
-        Me.numDelay.Size = New System.Drawing.Size(93, 30)
-        Me.numDelay.TabIndex = 3
-        Me.numDelay.Text = "PvNumericUD1"
-        Me.numDelay.Value = 5
         '
         'chkAntiVM
         '
@@ -911,7 +881,6 @@ Partial Class Main
     Friend WithEvents chkAntiVM As PVCheckbox
     Friend WithEvents chkAntiTask As PVCheckbox
     Friend WithEvents chkAntiWireshark As PVCheckbox
-    Friend WithEvents numDelay As PVNumericUD
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents picIcon As PictureBox
     Friend WithEvents chkIcon As PVCheckbox
@@ -927,7 +896,6 @@ Partial Class Main
     Friend WithEvents txtAssemblyCompany As PVTextbox
     Friend WithEvents txtAssemblyDescription As PVTextbox
     Friend WithEvents txtAssemblyTitle As PVTextbox
-    Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents numPump As PVNumericUD
     Friend WithEvents chkZoneIden As PVCheckbox

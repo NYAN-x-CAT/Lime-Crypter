@@ -39,31 +39,4 @@
     End Function
 
 
-    Public Shared Function String_To_Bytes(ByVal strInput As String) As Byte()
-        Dim i As Integer = 0
-        Dim x As Integer = 0
-        Dim bytes As Byte() = New Byte((strInput.Length) / 2 - 1) {}
-
-        While strInput.Length > i + 1
-            Dim lngDecimal As Long = Convert.ToInt32(strInput.Substring(i, 2), 16)
-            bytes(x) = Convert.ToByte(lngDecimal)
-            i = i + 2
-            x += 1
-        End While
-
-        Return bytes
-    End Function
-
-    Public Shared Function Bytes_To_String(ByVal bytes_Input As Byte()) As String
-        Dim strTemp As String = ""
-
-        For x As Integer = 0 To bytes_Input.GetUpperBound(0)
-            Dim number As Integer = Integer.Parse(bytes_Input(x).ToString())
-            strTemp += number.ToString("X").PadLeft(2, "0"c)
-        Next
-
-        Return strTemp
-    End Function
-
-
 End Class
