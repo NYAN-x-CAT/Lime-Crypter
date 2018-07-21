@@ -12,6 +12,7 @@
         Return r.Next(MinNumber, MaxNumber)
     End Function
 
+    'create fake subs inside our stub's class
     Function GenerateJunk(ByVal Ammount As Integer) As String
 
         If Ammount = 0 Then
@@ -103,7 +104,7 @@
         Return out
     End Function
 
-
+    'create fake classes and subs ..etc
     Function GenerateJunkClass(ByVal Ammount As Integer) As String
         If Ammount = 0 Then
             Ammount = 1
