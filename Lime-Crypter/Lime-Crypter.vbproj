@@ -68,15 +68,15 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Algorithm.vb" />
-    <Compile Include="Codedom.vb" />
-    <Compile Include="Helper.vb" />
-    <Compile Include="IconInjector.vb" />
-    <Compile Include="Junk.vb" />
-    <Compile Include="Main.Designer.vb">
+    <Compile Include="Classes\Algorithm.vb" />
+    <Compile Include="Classes\Codedom.vb" />
+    <Compile Include="Classes\Helper.vb" />
+    <Compile Include="Classes\IconInjector.vb" />
+    <Compile Include="Classes\Junk.vb" />
+    <Compile Include="Forms\Main.Designer.vb">
       <DependentUpon>Main.vb</DependentUpon>
     </Compile>
-    <Compile Include="Main.vb">
+    <Compile Include="Forms\Main.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -94,12 +94,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Theme.vb">
+    <Compile Include="Classes\Theme.vb">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Main.resx">
+    <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Main.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">

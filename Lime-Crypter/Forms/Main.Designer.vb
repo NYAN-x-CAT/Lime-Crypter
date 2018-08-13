@@ -23,6 +23,7 @@ Partial Class Main
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.PvForm1 = New Lime_Crypter.PVForm()
         Me.PvButton1 = New Lime_Crypter.PVButton()
         Me.PvTabControl_Side1 = New Lime_Crypter.PVTabControl_Side()
@@ -90,6 +91,9 @@ Partial Class Main
         CType(Me.picNyanCat, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
+        'BackgroundWorker1
+        '
+        '
         'PvForm1
         '
         Me.PvForm1.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(23, Byte), Integer), CType(CType(25, Byte), Integer))
@@ -103,7 +107,7 @@ Partial Class Main
         Me.PvForm1.Name = "PvForm1"
         Me.PvForm1.Size = New System.Drawing.Size(911, 517)
         Me.PvForm1.TabIndex = 0
-        Me.PvForm1.Text = "Lime Crypter v0.3"
+        Me.PvForm1.Text = "Lime Crypter v0.4"
         '
         'PvButton1
         '
@@ -569,7 +573,7 @@ Partial Class Main
         Me.btnAssemblyRandom.Location = New System.Drawing.Point(402, 326)
         Me.btnAssemblyRandom.MinimumSize = New System.Drawing.Size(20, 20)
         Me.btnAssemblyRandom.Name = "btnAssemblyRandom"
-        Me.btnAssemblyRandom.Size = New System.Drawing.Size(109, 42)
+        Me.btnAssemblyRandom.Size = New System.Drawing.Size(123, 42)
         Me.btnAssemblyRandom.TabIndex = 11
         Me.btnAssemblyRandom.Text = "Random"
         '
@@ -582,7 +586,7 @@ Partial Class Main
         Me.btnAssemblyClone.Location = New System.Drawing.Point(402, 258)
         Me.btnAssemblyClone.MinimumSize = New System.Drawing.Size(20, 20)
         Me.btnAssemblyClone.Name = "btnAssemblyClone"
-        Me.btnAssemblyClone.Size = New System.Drawing.Size(109, 42)
+        Me.btnAssemblyClone.Size = New System.Drawing.Size(123, 42)
         Me.btnAssemblyClone.TabIndex = 10
         Me.btnAssemblyClone.Text = "Clone"
         '
@@ -775,7 +779,7 @@ Partial Class Main
         Me.btnBuild.Location = New System.Drawing.Point(13, 301)
         Me.btnBuild.MinimumSize = New System.Drawing.Size(20, 20)
         Me.btnBuild.Name = "btnBuild"
-        Me.btnBuild.Size = New System.Drawing.Size(97, 36)
+        Me.btnBuild.Size = New System.Drawing.Size(168, 36)
         Me.btnBuild.TabIndex = 1
         Me.btnBuild.Text = "Build"
         '
@@ -919,4 +923,5 @@ Partial Class Main
     Friend WithEvents chkDrop As PVCheckbox
     Friend WithEvents chkBind As PVCheckbox
     Friend WithEvents chkBindOnce As PVCheckbox
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
 End Class
