@@ -10,7 +10,7 @@ Public Class Codedom
         Dim CodeProvider As New Microsoft.VisualBasic.VBCodeProvider(providerOptions)
         Dim Parameters As New CompilerParameters
         Dim OP As String = " /target:winexe /platform:x86 /optimize+ /nowarn"
-        If Main.chkIcon.Checked = True AndAlso Main.picIcon.ImageLocation <> "" Then
+        If ICOPath.Length > 3 Then
             OP += " /win32icon:" + Chr(34) + ICOPath + Chr(34)
         End If
         With Parameters
