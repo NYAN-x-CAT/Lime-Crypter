@@ -174,24 +174,25 @@
     End Sub
 
     Private Sub chkIcon_Click(sender As Object, e As EventArgs) Handles chkIcon.Click
-        If chkIcon.Checked = True Then
-            picIcon.Enabled = True
-        Else
-            picIcon.Enabled = False
-        End If
-    End Sub
-
-    Private Sub picIcon_Click(sender As Object, e As EventArgs) Handles picIcon.Click
         Try
-            Dim o As New OpenFileDialog
-            o.Filter = "Icon |*.ico"
-            If o.ShowDialog = DialogResult.OK Then
-                picIcon.ImageLocation = o.FileName
+            If chkIcon.Checked = True Then
+                Dim o As New OpenFileDialog
+                o.Filter = "Icon |*.ico"
+                If o.ShowDialog = DialogResult.OK Then
+                    picIcon.ImageLocation = o.FileName
+                Else
+                    picIcon.ImageLocation = ""
+                    chkIcon.Checked = False
+                End If
+            Else
+                picIcon.ImageLocation = ""
+                chkIcon.Checked = False
             End If
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
     End Sub
+
 
 
 
@@ -256,7 +257,7 @@
 
             chkIcon.Checked = True
             MsgBox("Select Icon")
-            picIcon_Click(picIcon, e)
+            chkIcon_Click(chkIcon, e)
 
             PvTabControl_Side1.SelectTab(3)
             MsgBox("Save Output")
@@ -390,6 +391,8 @@
                 Source = Replace(Source, "'%Bind%", Nothing)
                 If chkBindOnce.Checked = True Then
                     Source = Replace(Source, "'%BindOnce%", Nothing)
+                    Source = Replace(Source, "%LimeOnce%", Helper.Randomi(Helper.rand.Next(6, 12)))
+
                 Else
                     Source = Replace(Source, "'%BindDaily%", Nothing)
                 End If
@@ -410,9 +413,11 @@
                 R.Generate()
             End Using
 
-            '#################################################################
-            Codedom.Compiler(OutputPayload, Source, picIcon.ImageLocation) '#
-            '#################################################################
+            If chkIcon.Checked Then
+                Codedom.Compiler(OutputPayload, Source, picIcon.ImageLocation)
+            Else
+                Codedom.Compiler(OutputPayload, Source, Nothing)
+            End If
 
             If Codedom.OK = True Then 'Codedom finished, file is already compiled but we need to add icon...etc
 

