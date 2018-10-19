@@ -1,7 +1,7 @@
 
-<img src="https://i.imgur.com/0U5Zkxk.gif">
+<img src="https://i.imgur.com/UWSYEWt.png">
 
-# LimeCrypter
+# Lime Crypter
 
 An obfuscation tool for .Net + Native files. Applying some evasion techniques to bypass anti-virus software and install a persistence in the machine. Also, the output payload can be binded with a legit application while it bytes are being injected to legit process as well.
 
@@ -9,15 +9,9 @@ An obfuscation tool for .Net + Native files. Applying some evasion techniques to
 
 * .NET - Coded in Visual Basic .NET, required framework 4.0 dependency.
  
-* Codedom - No need for external dll to compile
-
-* USG - Adding some junk methods and rename all variables using chinese language
+* USG - Adding some junk methods and rename all variables
 
 * Injection - Hide payload behind a legit process
-
-* Bind - Add file to run with your payload runtime
-
-* Anti Analysis - Stop taskmanager and wireshark from analysing your payload
  
 * Anti Virtual Machines - Uninstall itself if the machine is virtual to avoid scanning or analyzing
  
