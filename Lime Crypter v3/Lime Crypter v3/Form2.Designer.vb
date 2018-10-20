@@ -35,6 +35,10 @@ Partial Class Form2
         Me.btnRandomExeName = New Lime_Crypter_v3.HuraButton()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.HuraGroupBox1 = New Lime_Crypter_v3.HuraGroupBox()
+        Me.chkBindOnce = New Lime_Crypter_v3.HuraCheckBox()
+        Me.HuraButton1 = New Lime_Crypter_v3.HuraButton()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.txtBind = New Lime_Crypter_v3.HuraTextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtUSG = New Lime_Crypter_v3.HuraComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -247,6 +251,10 @@ Partial Class Form2
         'HuraGroupBox1
         '
         Me.HuraGroupBox1.BackColor = System.Drawing.Color.Black
+        Me.HuraGroupBox1.Controls.Add(Me.chkBindOnce)
+        Me.HuraGroupBox1.Controls.Add(Me.HuraButton1)
+        Me.HuraGroupBox1.Controls.Add(Me.Label3)
+        Me.HuraGroupBox1.Controls.Add(Me.txtBind)
         Me.HuraGroupBox1.Controls.Add(Me.Label10)
         Me.HuraGroupBox1.Controls.Add(Me.txtUSG)
         Me.HuraGroupBox1.Controls.Add(Me.Label4)
@@ -260,6 +268,63 @@ Partial Class Form2
         Me.HuraGroupBox1.Size = New System.Drawing.Size(492, 506)
         Me.HuraGroupBox1.TabIndex = 5
         Me.HuraGroupBox1.Text = "HuraGroupBox1"
+        '
+        'chkBindOnce
+        '
+        Me.chkBindOnce.BaseColour = System.Drawing.Color.Black
+        Me.chkBindOnce.BorderColour = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(219, Byte), Integer), CType(CType(106, Byte), Integer))
+        Me.chkBindOnce.Checked = False
+        Me.chkBindOnce.CheckedColour = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(219, Byte), Integer), CType(CType(106, Byte), Integer))
+        Me.chkBindOnce.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.chkBindOnce.FontColour = System.Drawing.Color.FromArgb(CType(CType(150, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(150, Byte), Integer))
+        Me.chkBindOnce.Location = New System.Drawing.Point(350, 159)
+        Me.chkBindOnce.Name = "chkBindOnce"
+        Me.chkBindOnce.Size = New System.Drawing.Size(116, 22)
+        Me.chkBindOnce.TabIndex = 25
+        Me.chkBindOnce.Text = "Once"
+        '
+        'HuraButton1
+        '
+        Me.HuraButton1.BackColor = System.Drawing.Color.Transparent
+        Me.HuraButton1.BaseColour = System.Drawing.Color.Black
+        Me.HuraButton1.BorderColour = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(219, Byte), Integer), CType(CType(106, Byte), Integer))
+        Me.HuraButton1.FontColour = System.Drawing.Color.FromArgb(CType(CType(150, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(150, Byte), Integer))
+        Me.HuraButton1.HoverColour = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.HuraButton1.Location = New System.Drawing.Point(307, 152)
+        Me.HuraButton1.Name = "HuraButton1"
+        Me.HuraButton1.PressedColour = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(219, Byte), Integer), CType(CType(106, Byte), Integer))
+        Me.HuraButton1.ProgressColour = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(191, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.HuraButton1.Size = New System.Drawing.Size(32, 38)
+        Me.HuraButton1.TabIndex = 24
+        Me.HuraButton1.Text = "O"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(150, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(150, Byte), Integer))
+        Me.Label3.Location = New System.Drawing.Point(10, 159)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(54, 25)
+        Me.Label3.TabIndex = 23
+        Me.Label3.Text = "Bind:"
+        '
+        'txtBind
+        '
+        Me.txtBind.BackColor = System.Drawing.Color.Transparent
+        Me.txtBind.BackgroundColour = System.Drawing.Color.Black
+        Me.txtBind.BorderColour = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(219, Byte), Integer), CType(CType(106, Byte), Integer))
+        Me.txtBind.ForeColor = System.Drawing.Color.FromArgb(CType(CType(150, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(150, Byte), Integer))
+        Me.txtBind.Location = New System.Drawing.Point(108, 152)
+        Me.txtBind.MaxLength = 32767
+        Me.txtBind.Multiline = False
+        Me.txtBind.Name = "txtBind"
+        Me.txtBind.ReadOnly = False
+        Me.txtBind.Size = New System.Drawing.Size(189, 38)
+        Me.txtBind.Style = Lime_Crypter_v3.HuraTextBox.Styles.Normal
+        Me.txtBind.TabIndex = 22
+        Me.txtBind.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
+        Me.txtBind.TextColour = System.Drawing.Color.FromArgb(CType(CType(150, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(150, Byte), Integer))
+        Me.txtBind.UseSystemPasswordChar = False
         '
         'Label10
         '
@@ -292,7 +357,7 @@ Partial Class Form2
         '
         Me.Label4.AutoSize = True
         Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(150, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(150, Byte), Integer))
-        Me.Label4.Location = New System.Drawing.Point(168, 214)
+        Me.Label4.Location = New System.Drawing.Point(168, 227)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(74, 25)
         Me.Label4.TabIndex = 1
@@ -303,7 +368,7 @@ Partial Class Form2
         Me.txtDelay.BackColor = System.Drawing.Color.Transparent
         Me.txtDelay.BackgroundColour = System.Drawing.Color.Black
         Me.txtDelay.BorderColour = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(219, Byte), Integer), CType(CType(106, Byte), Integer))
-        Me.txtDelay.Location = New System.Drawing.Point(108, 210)
+        Me.txtDelay.Location = New System.Drawing.Point(108, 223)
         Me.txtDelay.MaxLength = 32767
         Me.txtDelay.Multiline = False
         Me.txtDelay.Name = "txtDelay"
@@ -350,7 +415,7 @@ Partial Class Form2
         Me.chkDelay.CheckedColour = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(219, Byte), Integer), CType(CType(106, Byte), Integer))
         Me.chkDelay.Cursor = System.Windows.Forms.Cursors.Hand
         Me.chkDelay.FontColour = System.Drawing.Color.FromArgb(CType(CType(150, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(150, Byte), Integer))
-        Me.chkDelay.Location = New System.Drawing.Point(15, 217)
+        Me.chkDelay.Location = New System.Drawing.Point(15, 230)
         Me.chkDelay.Name = "chkDelay"
         Me.chkDelay.Size = New System.Drawing.Size(87, 22)
         Me.chkDelay.TabIndex = 0
@@ -364,7 +429,7 @@ Partial Class Form2
         Me.chkAntiVM.CheckedColour = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(219, Byte), Integer), CType(CType(106, Byte), Integer))
         Me.chkAntiVM.Cursor = System.Windows.Forms.Cursors.Hand
         Me.chkAntiVM.FontColour = System.Drawing.Color.FromArgb(CType(CType(150, Byte), Integer), CType(CType(150, Byte), Integer), CType(CType(150, Byte), Integer))
-        Me.chkAntiVM.Location = New System.Drawing.Point(15, 267)
+        Me.chkAntiVM.Location = New System.Drawing.Point(15, 280)
         Me.chkAntiVM.Name = "chkAntiVM"
         Me.chkAntiVM.Size = New System.Drawing.Size(290, 22)
         Me.chkAntiVM.TabIndex = 1
@@ -935,4 +1000,8 @@ Partial Class Form2
     Friend WithEvents txtUSG As HuraComboBox
     Friend WithEvents chkInstall As HuraCheckBox
     Friend WithEvents txtAssemblyCompany As HuraTextBox
+    Friend WithEvents chkBindOnce As HuraCheckBox
+    Friend WithEvents HuraButton1 As HuraButton
+    Friend WithEvents Label3 As Label
+    Friend WithEvents txtBind As HuraTextBox
 End Class

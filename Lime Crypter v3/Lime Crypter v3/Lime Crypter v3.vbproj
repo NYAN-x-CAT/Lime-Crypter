@@ -49,8 +49,8 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IconExtractor">
-      <HintPath>..\..\..\Shadow Protecter Builder\Shadow Protecter Builder\bin\Debug\IconExtractor.dll</HintPath>
+    <Reference Include="IconExtractor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\IconExtractor.1.0.0.0\lib\net40-Client\IconExtractor.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.10.1.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
       <HintPath>..\packages\Mono.Cecil.0.10.1\lib\net40\Mono.Cecil.dll</HintPath>
