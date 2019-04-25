@@ -28,9 +28,11 @@ Public Class Renamer
                     Next
                 Next
             Next
-            definition.Write("Crypted_.exe")
+            definition.Write(File.Replace(".exe", "_.exe"))
             definition.Dispose()
             IO.File.Delete(File)
+            Threading.Thread.Sleep(250)
+            IO.File.Move(File.Replace(".exe", "_.exe"), File)
         Catch ex As Exception
             definition.Dispose()
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)

