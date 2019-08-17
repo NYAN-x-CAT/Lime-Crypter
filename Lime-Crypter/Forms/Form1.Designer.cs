@@ -303,9 +303,9 @@
             // 
             // btnIcon
             // 
-            this.btnIcon.Location = new System.Drawing.Point(353, 48);
+            this.btnIcon.Location = new System.Drawing.Point(353, 40);
             this.btnIcon.Name = "btnIcon";
-            this.btnIcon.Size = new System.Drawing.Size(130, 28);
+            this.btnIcon.Size = new System.Drawing.Size(130, 46);
             this.btnIcon.TabIndex = 9;
             this.btnIcon.Text = "Icon";
             this.btnIcon.UseVisualStyleBackColor = true;
@@ -313,9 +313,9 @@
             // 
             // btnInformation
             // 
-            this.btnInformation.Location = new System.Drawing.Point(38, 48);
+            this.btnInformation.Location = new System.Drawing.Point(38, 40);
             this.btnInformation.Name = "btnInformation";
-            this.btnInformation.Size = new System.Drawing.Size(130, 28);
+            this.btnInformation.Size = new System.Drawing.Size(130, 46);
             this.btnInformation.TabIndex = 8;
             this.btnInformation.Text = "Information";
             this.btnInformation.UseVisualStyleBackColor = true;
