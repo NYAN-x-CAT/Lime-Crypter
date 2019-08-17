@@ -73,7 +73,7 @@ namespace Lime_Crypter.Build
                         CompilerOptions = compilerOptions,
                         TreatWarningsAsErrors = false,
                         IncludeDebugInformation = false,
-                        TempFiles = new TempFileCollection(),
+                        TempFiles = new TempFileCollection(TempDirectory, false),
                     };
                     using (ResourceWriter rw = new ResourceWriter(Path.Combine(TempDirectory, StubResourcesName + ".resources")))
                     {
@@ -114,7 +114,7 @@ namespace Lime_Crypter.Build
                         CompilerOptions = compilerOptions,
                         TreatWarningsAsErrors = false,
                         IncludeDebugInformation = false,
-                        TempFiles = new TempFileCollection(),
+                        TempFiles = new TempFileCollection(TempDirectory, false),
                     };
                     using (ResourceWriter rw = new ResourceWriter(Path.Combine(TempDirectory, LoaderResourcesName + ".resources")))
                     {
@@ -180,7 +180,7 @@ namespace Lime_Crypter.Build
             Stub = Stub.Replace("#AesKey", AesKey);
 
             if (IsInstall)
-            Stub = Stub.Replace("@IsInstall", "true");
+                Stub = Stub.Replace("@IsInstall", "true");
             else
                 Stub = Stub.Replace("@IsInstall", "false");
             Stub = Stub.Replace("#FileName", FileName + ".exe");
