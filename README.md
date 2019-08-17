@@ -1,26 +1,22 @@
 
-<img src="https://i.imgur.com/UWSYEWt.png">
+<img src="https://i.imgur.com/2k40yRA.png">
 
 # Lime Crypter
 
-An obfuscation tool for .Net + Native files. Applying some evasion techniques to bypass anti-virus software and install a persistence in the machine. Also, the output payload can be binded with a legit application while it bytes are being injected to legit process as well.
+An obfuscation tool for .Net + Native files.
 
 ## Main Features
 
 * .NET - Coded in Visual Basic .NET, required framework 4.0 dependency.
  
-* USG - Adding some junk methods and rename all variables
-
 * Injection - Hide payload behind a legit process
- 
-* Anti Virtual Machines - Uninstall itself if the machine is virtual to avoid scanning or analyzing
- 
+  
  
 ## Prerequisites
 
 To open project you need:
 
-1- Visual Studio 2017+
+1- Visual Studio 2019+
 
 2- This repository
 
