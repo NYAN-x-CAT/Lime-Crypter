@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtCmd = new System.Windows.Forms.TextBox();
             this.btnPayloadBrowse = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtPayload = new System.Windows.Forms.TextBox();
@@ -65,15 +68,45 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.txtCmd);
             this.groupBox1.Controls.Add(this.btnPayloadBrowse);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtPayload);
             this.groupBox1.Location = new System.Drawing.Point(12, 14);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(540, 100);
+            this.groupBox1.Size = new System.Drawing.Size(540, 133);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Select a file";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(474, 90);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(22, 21);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 89);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(125, 20);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "-Command Line:";
+            // 
+            // txtCmd
+            // 
+            this.txtCmd.Enabled = false;
+            this.txtCmd.Location = new System.Drawing.Point(158, 86);
+            this.txtCmd.Name = "txtCmd";
+            this.txtCmd.Size = new System.Drawing.Size(276, 26);
+            this.txtCmd.TabIndex = 2;
             // 
             // btnPayloadBrowse
             // 
@@ -97,9 +130,8 @@
             // txtPayload
             // 
             this.txtPayload.Location = new System.Drawing.Point(158, 34);
-            this.txtPayload.Multiline = true;
             this.txtPayload.Name = "txtPayload";
-            this.txtPayload.Size = new System.Drawing.Size(276, 28);
+            this.txtPayload.Size = new System.Drawing.Size(276, 26);
             this.txtPayload.TabIndex = 0;
             // 
             // groupBox2
@@ -117,7 +149,7 @@
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Enabled = false;
-            this.groupBox2.Location = new System.Drawing.Point(13, 168);
+            this.groupBox2.Location = new System.Drawing.Point(13, 194);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(539, 212);
             this.groupBox2.TabIndex = 1;
@@ -236,7 +268,7 @@
             // chkInstall
             // 
             this.chkInstall.AutoSize = true;
-            this.chkInstall.Location = new System.Drawing.Point(23, 141);
+            this.chkInstall.Location = new System.Drawing.Point(23, 167);
             this.chkInstall.Name = "chkInstall";
             this.chkInstall.Size = new System.Drawing.Size(22, 21);
             this.chkInstall.TabIndex = 1;
@@ -248,7 +280,7 @@
             this.groupBox3.Controls.Add(this.btnItself);
             this.groupBox3.Controls.Add(this.btnRegsvcs);
             this.groupBox3.Controls.Add(this.btnRegasm);
-            this.groupBox3.Location = new System.Drawing.Point(23, 401);
+            this.groupBox3.Location = new System.Drawing.Point(23, 427);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(529, 106);
             this.groupBox3.TabIndex = 2;
@@ -294,7 +326,7 @@
             // 
             this.groupBox4.Controls.Add(this.btnIcon);
             this.groupBox4.Controls.Add(this.btnInformation);
-            this.groupBox4.Location = new System.Drawing.Point(22, 527);
+            this.groupBox4.Location = new System.Drawing.Point(22, 553);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(530, 100);
             this.groupBox4.TabIndex = 3;
@@ -324,7 +356,7 @@
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.btnBuild);
-            this.groupBox5.Location = new System.Drawing.Point(22, 644);
+            this.groupBox5.Location = new System.Drawing.Point(22, 670);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(530, 79);
             this.groupBox5.TabIndex = 4;
@@ -346,7 +378,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(572, 740);
+            this.ClientSize = new System.Drawing.Size(572, 765);
             this.Controls.Add(this.chkInstall);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -401,5 +433,8 @@
         private System.Windows.Forms.Button btnSecondFolderRandom;
         private System.Windows.Forms.TextBox txtSecondFolder;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtCmd;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

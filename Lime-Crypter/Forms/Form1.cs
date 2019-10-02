@@ -121,6 +121,8 @@ namespace Lime_Crypter.Forms
                     SetupBuild setupBuild = new SetupBuild
                     {
                         PayloadName = txtPayload.Text, //payload
+                        CommaLineIsChecked = checkBox1.Checked,
+                        CommandLine = txtCmd.Text,
                         SaveFileName = saveFileDialog.FileName, //save path
 
                         //install
@@ -211,6 +213,12 @@ namespace Lime_Crypter.Forms
             }
         }
 
-
+        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+                txtCmd.Enabled = true;
+            else
+                txtCmd.Enabled = false;
+        }
     }
 }

