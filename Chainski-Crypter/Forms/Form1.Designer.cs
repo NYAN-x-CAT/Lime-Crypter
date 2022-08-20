@@ -193,11 +193,11 @@
             // txtSecondFolder
             // 
             this.txtSecondFolder.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.txtSecondFolder.Location = new System.Drawing.Point(122, 96);
+            this.txtSecondFolder.Location = new System.Drawing.Point(105, 96);
             this.txtSecondFolder.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.txtSecondFolder.Multiline = true;
             this.txtSecondFolder.Name = "txtSecondFolder";
-            this.txtSecondFolder.Size = new System.Drawing.Size(193, 23);
+            this.txtSecondFolder.Size = new System.Drawing.Size(210, 23);
             this.txtSecondFolder.TabIndex = 12;
             // 
             // label5
@@ -214,10 +214,10 @@
             // 
             this.txtFoldername.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.txtFoldername.FormattingEnabled = true;
-            this.txtFoldername.Location = new System.Drawing.Point(122, 65);
+            this.txtFoldername.Location = new System.Drawing.Point(105, 65);
             this.txtFoldername.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.txtFoldername.Name = "txtFoldername";
-            this.txtFoldername.Size = new System.Drawing.Size(193, 23);
+            this.txtFoldername.Size = new System.Drawing.Size(210, 23);
             this.txtFoldername.TabIndex = 9;
             // 
             // btnRegistrynameRandom
@@ -235,11 +235,11 @@
             // txtRegistryname
             // 
             this.txtRegistryname.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.txtRegistryname.Location = new System.Drawing.Point(122, 124);
+            this.txtRegistryname.Location = new System.Drawing.Point(105, 124);
             this.txtRegistryname.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.txtRegistryname.Multiline = true;
             this.txtRegistryname.Name = "txtRegistryname";
-            this.txtRegistryname.Size = new System.Drawing.Size(193, 23);
+            this.txtRegistryname.Size = new System.Drawing.Size(210, 23);
             this.txtRegistryname.TabIndex = 7;
             // 
             // btnFoldernameRandom
@@ -279,11 +279,11 @@
             // txtFilename
             // 
             this.txtFilename.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.txtFilename.Location = new System.Drawing.Point(122, 34);
+            this.txtFilename.Location = new System.Drawing.Point(105, 34);
             this.txtFilename.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.txtFilename.Multiline = true;
             this.txtFilename.Name = "txtFilename";
-            this.txtFilename.Size = new System.Drawing.Size(193, 23);
+            this.txtFilename.Size = new System.Drawing.Size(210, 23);
             this.txtFilename.TabIndex = 2;
             // 
             // label3
@@ -409,7 +409,7 @@
             this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.groupBox4.Size = new System.Drawing.Size(421, 75);
+            this.groupBox4.Size = new System.Drawing.Size(421, 84);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Assembly";
@@ -431,7 +431,7 @@
             // 
             this.btnInformation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInformation.ForeColor = System.Drawing.Color.Cyan;
-            this.btnInformation.Location = new System.Drawing.Point(9, 30);
+            this.btnInformation.Location = new System.Drawing.Point(15, 30);
             this.btnInformation.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.btnInformation.Name = "btnInformation";
             this.btnInformation.Size = new System.Drawing.Size(102, 34);
@@ -450,7 +450,7 @@
             this.groupBox5.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Padding = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.groupBox5.Size = new System.Drawing.Size(421, 59);
+            this.groupBox5.Size = new System.Drawing.Size(421, 92);
             this.groupBox5.TabIndex = 4;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Create Payload";
@@ -460,10 +460,10 @@
             this.btnBuild.Enabled = false;
             this.btnBuild.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuild.ForeColor = System.Drawing.Color.Cyan;
-            this.btnBuild.Location = new System.Drawing.Point(166, 18);
+            this.btnBuild.Location = new System.Drawing.Point(158, 33);
             this.btnBuild.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.btnBuild.Name = "btnBuild";
-            this.btnBuild.Size = new System.Drawing.Size(111, 26);
+            this.btnBuild.Size = new System.Drawing.Size(111, 34);
             this.btnBuild.TabIndex = 10;
             this.btnBuild.Text = "Build";
             this.btnBuild.UseVisualStyleBackColor = true;
@@ -474,7 +474,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.ClientSize = new System.Drawing.Size(441, 573);
+            this.ClientSize = new System.Drawing.Size(441, 600);
             this.Controls.Add(this.chkInstall);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
