@@ -6,7 +6,7 @@
 </p>
 
 
-### Chainski Crypter (Lime Crypter Mod) 
+### Chainski Crypter 
 An obfuscation tool for .Net + Native files.
 
 ### Main Features
