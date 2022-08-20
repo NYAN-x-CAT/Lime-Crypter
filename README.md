@@ -18,7 +18,7 @@ An obfuscation tool for .Net + Native files.
 - Sleep For 60 seconds (AMSI Bypass)
 - Changed Injection Techniques
 - Better UI
-- A lot more coming soon
+- More features coming soon
 
 ### Prerequisites
 
