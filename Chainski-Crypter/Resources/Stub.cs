@@ -44,7 +44,7 @@ namespace Stub
                 using (RijndaelManaged AES = new RijndaelManaged())
                 {
                     AES.KeySize = 256;
-                    AES.BlockSize = 128;
+                    AES.BlockSize = 256;
                     var passwordBytes = Encoding.UTF8.GetBytes("#AesKey");
                     var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
                     AES.Key = key.GetBytes(AES.KeySize / 8);
