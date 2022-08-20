@@ -460,7 +460,7 @@
             this.btnBuild.Enabled = false;
             this.btnBuild.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuild.ForeColor = System.Drawing.Color.Cyan;
-            this.btnBuild.Location = new System.Drawing.Point(158, 33);
+            this.btnBuild.Location = new System.Drawing.Point(146, 34);
             this.btnBuild.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.btnBuild.Name = "btnBuild";
             this.btnBuild.Size = new System.Drawing.Size(111, 34);
