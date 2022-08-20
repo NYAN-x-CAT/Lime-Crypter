@@ -1,6 +1,5 @@
 <a href="https://github.com/chainski/Chainski-Crypter"><img src="https://img.shields.io/badge/OPEN--SOURCE-YES-green"></a>
 <a href="https://github.com/chainski/Chainski-Crypter"><img src="https://img.shields.io/github/license/Chainski/Chainski-Crypter"></a> 
-<a href="https://github.com/chainski/Chainski-Crypter/releases"><img src="https://img.shields.io/github/v/release/chainski/Chainski-Crypter?style=plastic"></a> 
 <a href="https://github.com/chainski/Chainski-Crypter"><img src="https://img.shields.io/github/repo-size/Chainski/Chainski-Crypter?style=plastic"></a>
 
 
