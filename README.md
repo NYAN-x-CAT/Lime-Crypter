@@ -1,9 +1,8 @@
 <a href="https://github.com/Chainski/Chainski-Crypter/blob/master/LICENSE"><img src="https://img.shields.io/github/license/Chainski/Chainski-Crypter"></a> 
 <a href="https://github.com/chainski/Chainski-Crypter"><img src="https://img.shields.io/github/repo-size/Chainski/Chainski-Crypter?style=plastic"></a>
 
-
 <p align="center">
-<img src="https://user-images.githubusercontent.com/96607632/185721689-2db83140-8da7-4ebc-b98a-5b767d3436a7.png", width="400", height="400">
+<img src="https://user-images.githubusercontent.com/96607632/185725304-a6d3c3bd-dd7e-42ce-8847-a36caa83b5c4.png", width="400", height="400">
 </p>
 
 
