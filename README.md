@@ -15,17 +15,16 @@ An obfuscation tool for .Net + Native files.
 - Injection - Hide payload behind a legit process
 
 ## Added Features 
-
-- Changed Sleep To 60 seconds (AMSI Bypass)
-- Added More Injection Techniques
+- Sleep For 60 seconds (AMSI Bypass)
+- Changed Injection Techniques
 - Better UI
 - A lot more coming soon
 
 ### Prerequisites
-To open project you need:
 
-1- Visual Studio 2019+
-2- This repository
+To open project you need:
+- Visual Studio 2019+
+- This repository
 
 ### DISCLAIMER !!! 
 
