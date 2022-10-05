@@ -15,7 +15,6 @@ An obfuscation tool for .Net + Native files.
 - Injection - Hide payload behind a legit process
 
 ## Added Features 
-- Sleep For 60 seconds (AMSI Bypass)
 - Changed Injection Techniques
 - Better UI
 - More features coming soon
