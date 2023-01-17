@@ -35,8 +35,8 @@ My software is open source and free for public use.
 If you found any of these repos useful and would like to support this project financially, 
 feel free to donate to my bitcoin address.
 
-### 16T1fUehoGR4E2sj98u9e9mKuQ7uSLvxRJ
-![image](https://user-images.githubusercontent.com/96607632/173610346-a08309b7-7ce5-4be8-88f2-d79cb6e9c3bf.png)
+<a href="https://www.blockchain.com/btc/address/16T1fUehoGR4E2sj98u9e9mKuQ7uSLvxRJ"><img src="https://img.shields.io/badge/bitcoin-donate-yellow.svg"></a>
+
 
 ## Credits
 https://github.com/NYAN-x-CAT/Lime-Crypter
