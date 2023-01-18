@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Lime_Crypter.Forms
+namespace Chainski_Crypter.Forms
 {
     public partial class FormChangeIcon : Form
     {
@@ -34,6 +34,11 @@ namespace Lime_Crypter.Forms
                     pictureIcon.ImageLocation = string.Empty;
                 }
             }
+        }
+
+        private void FormChangeIcon_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

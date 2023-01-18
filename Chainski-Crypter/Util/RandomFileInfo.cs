@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lime_Crypter.Util
+namespace Chainski_Crypter.Util
 {
     public class RandomFileInfo
     {

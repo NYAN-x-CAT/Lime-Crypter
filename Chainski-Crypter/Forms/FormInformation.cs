@@ -1,4 +1,4 @@
-﻿using Lime_Crypter.Util;
+﻿using Chainski_Crypter.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Lime_Crypter.Forms
+namespace Chainski_Crypter.Forms
 {
     public partial class FormInformation : Form
     {

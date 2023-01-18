@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Lime_Crypter.Forms;
-namespace Lime_Crypter
+using Chainski_Crypter.Forms;
+namespace Chainski_Crypter
 {
     static class Program
     {

