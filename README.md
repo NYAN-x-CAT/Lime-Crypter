@@ -1,7 +1,15 @@
-<a href="https://github.com/Chainski/Chainski-Crypter/blob/master/LICENSE"><img src="https://img.shields.io/github/license/Chainski/Chainski-Crypter"></a> 
-<a href="https://github.com/chainski/Chainski-Crypter"><img src="https://img.shields.io/github/repo-size/Chainski/Chainski-Crypter?style=plastic"></a>
-<a href="https://github.com/chainski/IPLogger"><img src="https://img.shields.io/badge/dynamic/json?label=Visitors&query=value&url=https%3A%2F%2Fapi.countapi.xyz%2Fhit%2FChainski%2FChainski-Crypter"></a> 
-<a href="https://github.com/chainski/Chainski-Crypter"><img src="https://img.shields.io/badge/contributions-welcome-green"></a>
+<p align= "center">
+  <img src="https://img.shields.io/github/languages/top/Chainski/Chainski-Crypter?color=green">
+   <img src="https://img.shields.io/github/stars/Chainski/Chainski-Crypter?style=flat&color=green">
+   <img src="https://img.shields.io/github/forks/Chainski/Chainski-Crypter?style=flat&color=green">
+   <img src="https://img.shields.io/github/issues/Chainski/Chainski-Crypter?style=flat&color=green">
+  <br>
+   <img src="https://img.shields.io/github/license/Chainski/Chainski-Crypter?color=green">
+   <img src="https://img.shields.io/github/contributors/Chainski/Chainski-Crypter?color=green">
+    <img src="https://hits.sh/github.com/Chainski/Chainski-Crypter.svg?label=views&color=green">
+    <img src="https://img.shields.io/github/downloads/Chainski/Chainski-Crypter/total?color=green">
+   <br>
+</p>
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/96607632/185758410-2b285b0b-59e1-4b5c-b6e0-1f269a24a7b8.png", width="400", height="400">
